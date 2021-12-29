@@ -69,6 +69,8 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                         {email}<br>
                                         <abbr><b><?php echo display('website') ?>:</b></abbr> 
                                         {website}<br>
+                                        <abbr><b>GSTIN NUMBER:</b></abbr> 
+                                        {gstin_number}<br>
                                          {/company_info}
                                          <abbr>{tax_regno}</abbr>
                                     </address>
@@ -79,14 +81,13 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                 
                                  
                                 <div class="col-sm-4 text-left invoice-address">
-                                    <h2 class="m-t-0"><?php echo display('invoice') ?></h2>
-                                    <div><?php echo display('invoice_no') ?>: {invoice_no}</div>
-                                    <div class="m-b-15"><?php echo display('billing_date') ?>: {final_date}</div>
+                                <span class="label label-success-outline m-r-15"><?php echo display('billing_to') ?></span><br/>
 
-                                    <span class="label label-success-outline m-r-15"><?php echo display('billing_to') ?></span>
+                                    
 
-                                    <address class="customer_name_p">  
-                                        <strong  class="c_name" >{customer_name} </strong><br>
+                                    
+                                    <address class="">  
+                                        <strong  class="" >{customer_name} </strong><br>
                                         <?php if ($customer_address) { ?>
                                             {customer_address}
                                         <?php } ?>
@@ -101,6 +102,8 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                             {customer_email}
                                         <?php } ?>
                                     </address>
+                                    <div><?php echo display('invoice_no') ?>: {invoice_no}</div>
+                                    <div class="m-b-15"><?php echo display('billing_date') ?>: {final_date}</div>
                                 </div>
                             </div> 
 
@@ -127,6 +130,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 <th class="text-right"><?php echo ''; ?> </th>
 <?php }?>
                                             <th class="text-right"><?php echo display('rate') ?></th>
+                                            <th class="text-right">GST%</th>
                                             <th class="text-right"><?php echo display('ammount') ?></th>
                                         </tr>
                                     </thead>
@@ -139,6 +143,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                             <td align="center">{description}</td>
                                             <td align="center">{serial_no}</td>
                                             <td align="right">{quantity}</td>
+                                            
 
                                             <?php if ($discount_type == 1) { ?>
                                                 <td align="right">{discount_per}</td>
@@ -147,12 +152,15 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                             <?php } ?>
 
                                             <td align="right"><?php echo (($position == 0) ? "$currency {rate}" : "{rate} $currency") ?></td>
+                                            <td align="right">{tax}</td>
                                             <td align="right"><?php echo (($position == 0) ? "$currency {total_price}" : "{total_price} $currency") ?></td>
+                                            
                                         </tr>
                                         {/invoice_all_data}
                                         <tr>
                                             <td class="text-left" colspan="5"><b><?php echo display('grand_total') ?>:</b></td>
                                             <td align="right" ><b>{subTotal_quantity}</b></td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td align="right" ><b><?php echo (($position == 0) ? "$currency {subTotal_ammount}" : "{subTotal_ammount} $currency") ?></b></td>

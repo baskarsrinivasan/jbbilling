@@ -87,7 +87,10 @@ class Cproduct extends CI_Controller {
         }
 
         $price = $this->input->post('price',TRUE);
+      
         $tax_percentage = $this->input->post('tax',TRUE);
+        $sgst=$tax_percentage/2;
+      
         $tax = $tax_percentage / 100;
 
         $tablecolumn = $this->db->list_fields('tax_collection');
@@ -106,7 +109,9 @@ class Cproduct extends CI_Controller {
             $data['product_name'] = $this->input->post('product_name',TRUE);
             $data['category_id']  = $this->input->post('category_id',TRUE);
             $data['unit']         = $this->input->post('unit',TRUE);
-            $data['tax']          = 0;
+            $data['tax']          = $tax_percentage;
+            $data['sgst']          = $sgst;
+            $data['cgst']          = $sgst;
             $data['serial_no']    = $this->input->post('serial_no',TRUE);
             $data['price']        = $price;
             $data['product_model']= $this->input->post('model',TRUE);
@@ -196,6 +201,9 @@ class Cproduct extends CI_Controller {
 
 
         $price = $this->input->post('price',TRUE);
+        $tax = $this->input->post('tax',TRUE);
+        $sgst = $this->input->post('sgst',TRUE);
+        $cgst = $this->input->post('cgst',TRUE);
        
         $tablecolumn = $this->db->list_fields('tax_collection');
         $num_column = count($tablecolumn)-4;
@@ -215,7 +223,9 @@ class Cproduct extends CI_Controller {
             $data['product_model']  = $this->input->post('model',TRUE);
             $data['product_details']= $this->input->post('description',TRUE);
             $data['unit']           = $this->input->post('unit',TRUE);
-            $data['tax']            = 0;
+            $data['tax']            = $tax;
+            $data['sgst']            = $sgst;
+            $data['cgst']            = $cgst;
             $data['image']          = $image_name;
        
         $result = $CI->Products->update_product($data, $product_id);

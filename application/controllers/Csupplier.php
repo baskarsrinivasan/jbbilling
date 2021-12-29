@@ -27,6 +27,7 @@ class Csupplier extends CI_Controller {
        
         $data = array(
             'supplier_name' => $this->input->post('supplier_name',TRUE),
+            'gstin_number' => $this->input->post('gstin_number',TRUE),
             'address'       => $this->input->post('address',TRUE),
             'address2'      => $this->input->post('address2',TRUE),
             'mobile'        => $this->input->post('mobile',TRUE),

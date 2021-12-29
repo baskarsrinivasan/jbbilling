@@ -388,7 +388,7 @@ var twelveHour = $('.timepicker-12-hr').wickedpicker();
 
              "aaSorting": [[ 0, "asc" ]],
              "columnDefs": [
-                { "bSortable": false, "aTargets": [1,2,3,4,5,6,7] },
+                { "bSortable": false, "aTargets": [1,2,3,4,5,6,7,8] },
 
             ],
            'processing': true,
@@ -430,7 +430,8 @@ var twelveHour = $('.timepicker-12-hr').wickedpicker();
                }
             },
           'columns': [
-             { data: 'supplier_name' },
+             { data: 'supplier_name'},
+             { data: 'gstin_number'},
              { data: 'address'},
              { data: 'mobile' },
              { data: 'phone' },
@@ -520,7 +521,9 @@ var twelveHour = $('.timepicker-12-hr').wickedpicker();
              { data: 'product_model'},
              { data: 'supplier_name' },
              { data: 'price' },
+             
              { data: 'purchase_p' },
+             { data: 'tax' },
              { data: 'image'},
              { data: 'button'},
           ],
@@ -1272,3 +1275,10 @@ $(document).ready(function(){
             //Update account
             $("#update_account_data").validate();
 
+            $(document).on('change', '.gst', function() {
+              var get_gst=$(this).val();
+              var sgst=get_gst/2;
+              $('.sgst').val(sgst);
+              $('.cgst').val(sgst);
+              
+            });

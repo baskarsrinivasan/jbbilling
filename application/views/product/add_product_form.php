@@ -162,7 +162,41 @@
                                     </div>
                                 </div> 
                             </div>
-                             <?php  $i=0;
+                            <div class="col-sm-6">
+                         <div class="form-group row">
+                            <label for="tax" class="col-sm-4 col-form-label">GST <i class="text-danger"></i></label>
+                            <div class="col-sm-7">
+                                <select class="form-control gst" name="tax">
+                                    <option>Select</option>
+                                    <option value="5">5</option>
+                                    <option value="12">12</option>
+                                    <option value="18">18</option>
+                                </select>
+                              <!-- <input type="text" name="tax<?php echo $i;?>" class="form-control" value="<?php echo number_format($taxss['default_value'], 2, '.', ',');?>"> -->
+                            </div>
+                            <div class="col-sm-1"> <i class="text-success">%</i></div>
+                            
+                        </div>
+                        <div class="form-group row">
+                            <label for="tax" class="col-sm-4 col-form-label">SGST <i class="text-danger"></i></label>
+                            <div class="col-sm-7">
+                            <input type="text" name="sgst" class="form-control sgst" value="0" readonly>
+                            </div>
+                            <div class="col-sm-1"> <i class="text-success">%</i></div>
+                            
+                        </div>
+                        <div class="form-group row">
+                            <label for="tax" class="col-sm-4 col-form-label">CGST <i class="text-danger"></i></label>
+                            <div class="col-sm-7">
+                            <input type="text" name="cgst" class="form-control cgst" value="0" readonly>
+                            </div>
+                            <div class="col-sm-1"> <i class="text-success">%</i></div>
+                            
+                        </div>
+                        
+                            
+                    </div>
+                             <!-- <?php  $i=0;
                     foreach ($taxfield as $taxss) {?>
                    
                             <div class="col-sm-6">
@@ -175,7 +209,7 @@
                         </div>
                     </div>
                
-                       <?php $i++;}?>
+                       <?php $i++;}?> -->
                         </div> 
 
 
@@ -237,3 +271,7 @@
 <!-- Add Product End -->
 
 
+<script>
+   
+    
+</script>

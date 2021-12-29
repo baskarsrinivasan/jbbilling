@@ -195,7 +195,10 @@
                                             <td class="test">
                                                 <input type="text" name="product_rate[]" onkeyup="calculate_store({sl});" onchange="calculate_store({sl});" id="product_rate_{sl}" class="form-control product_rate_{sl} text-right" placeholder="0.00" value="{rate}" min="0" tabindex="7"/>
                                             </td>
-                                           
+                                            <td class="text-right">
+                                                <input type="text" class="form-control gst_1" id="gst_1" name="tax[]" readonly> 
+                                            
+                                            </td>
 
                                             <td class="text-right">
                                                 <input class="form-control total_price text-right" type="text" name="total_price[]" id="total_price_{sl}" value="{total_amount}" readonly="readonly" />

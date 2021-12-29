@@ -74,7 +74,12 @@
                                 <input class="form-control" name ="supplier_name" id="supplier_name" type="text" placeholder="<?php echo display('supplier_name') ?>"  required="" tabindex="1">
                             </div>
                         </div>
-
+                        <div class="form-group row">
+                            <label for="supplier_name" class="col-sm-4 col-form-label">GSTIN NUMBER<i class="text-danger">*</i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name ="gstin_number" id="gstin_number" type="text" placeholder="GSTIN NUMBER"  required="" tabindex="1">
+                            </div>
+                        </div>
                        	<div class="form-group row">
                             <label for="mobile" class="col-sm-4 col-form-label"><?php echo display('supplier_mobile') ?> <i class="text-danger"></i></label>
                             <div class="col-sm-8">

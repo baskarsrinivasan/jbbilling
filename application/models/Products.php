@@ -88,6 +88,7 @@ class Products extends CI_Model {
                 a.product_id,
                 a.product_model,
                 a.image,
+                a.tax,
                 c.supplier_price,
                 c.supplier_id,
                 m.supplier_name
@@ -121,6 +122,7 @@ class Products extends CI_Model {
      }
 
          $product_name = '<a href="'.$base_url.'Cproduct/product_details/'.$record->product_id.'">'.$record->product_name.'</a>';
+        
          $supplier = '<a href="'.$base_url.'Csupplier/supplier_ledger_info/'.$record->supplier_id.'">'.$record->supplier_name.'</a>';
                
             $data[] = array( 
@@ -129,6 +131,7 @@ class Products extends CI_Model {
                 'product_model'    =>$record->product_model,
                 'supplier_name'    =>$supplier,
                 'price'            =>$record->price,
+                'tax'            => $record->tax,
                 'purchase_p'       =>$record->supplier_price,
                 'image'            =>$image,
                 'button'           =>$button,

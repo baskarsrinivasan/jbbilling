@@ -40,7 +40,7 @@ function addInputField(t) {
         tab10 = tabindex + 10;
         tab11 = tabindex + 11;
         tab12 = tabindex + 12;
-        e.innerHTML = "<td><input type='text' name='product_name' onkeypress='invoice_productList(" + count + ");' class='form-control productSelection common_product' placeholder='Product Name' id='" + a + "' required tabindex='" + tab1 + "'><input type='hidden' class='common_product autocomplete_hidden_value  product_id_" + count + "' name='product_id[]' id='SchoolHiddenId'/></td><td><input type='text' name='desc[]'' class='form-control text-right ' tabindex='" + tab2 + "'/></td><td><select class='form-control' id='serial_no_" + count + "' name='serial_no[]' tabindex='" + tab3 + "'><option></option></select></td> <td><input type='text' name='available_quantity[]' id='' class='form-control text-right common_avail_qnt available_quantity_" + count + "' value='0' readonly='readonly' /></td><td><input class='form-control text-right common_name unit_" + count + " valid' value='None' readonly='' aria-invalid='false' type='text'></td><td> <input type='text' name='product_quantity[]' value='1' required='required' onkeyup='quantity_calculate(" + count + ");' onchange='quantity_calculate(" + count + ");' id='total_qntt_" + count + "' class='common_qnt total_qntt_" + count + " form-control text-right'  placeholder='0.00' min='0' tabindex='" + tab3 + "'/></td><td><input type='text' name='product_rate[]' onkeyup='quantity_calculate(" + count + ");' onchange='quantity_calculate(" + count + ");' id='price_item_" + count + "' class='common_rate price_item" + count + " form-control text-right' required placeholder='0.00' min='0' tabindex='" + tab4 + "'/></td><td><input type='text' name='discount[]' onkeyup='quantity_calculate(" + count + ");' onchange='quantity_calculate(" + count + ");' id='discount_" + count + "' class='form-control text-right common_discount' placeholder='0.00' min='0' tabindex='" + tab5 + "' /><input type='hidden' value='' name='discount_type' id='discount_type_" + count + "'></td><td class='text-right'><input class='common_total_price total_price form-control text-right' type='text' name='total_price[]' id='total_price_" + count + "' value='0.00' readonly='readonly'/></td><td>"+tbfild+"<input type='hidden' id='all_discount_" + count + "' class='total_discount dppr' name='discount_amount[]'/><button tabindex='" + tab5 + "' style='text-align: right;' class='btn btn-danger' type='button' value='Delete' onclick='deleteRow(this)'><i class='fa fa-close'></i></button></td>",
+        e.innerHTML = "<td><input type='text' name='product_name' onkeypress='invoice_productList(" + count + ");' class='form-control productSelection common_product' placeholder='Product Name' id='" + a + "' required tabindex='" + tab1 + "'><input type='hidden' class='common_product autocomplete_hidden_value  product_id_" + count + "' name='product_id[]' id='SchoolHiddenId'/></td><td><input type='text' name='desc[]'' class='form-control text-right ' tabindex='" + tab2 + "'/></td><td><select class='form-control' id='serial_no_" + count + "' name='serial_no[]' tabindex='" + tab3 + "'><option></option></select></td> <td><input type='text' name='available_quantity[]' id='' class='form-control text-right common_avail_qnt available_quantity_" + count + "' value='0' readonly='readonly' /></td><td><input class='form-control text-right common_name unit_" + count + " valid' value='None' readonly='' aria-invalid='false' type='text'></td><td> <input type='text' name='product_quantity[]' value='1' required='required' onkeyup='quantity_calculate(" + count + ");' onchange='quantity_calculate(" + count + ");' id='total_qntt_" + count + "' class='common_qnt total_qntt_" + count + " form-control text-right'  placeholder='0.00' min='0' tabindex='" + tab3 + "'/></td><td><input type='text' name='product_rate[]' onkeyup='quantity_calculate(" + count + ");' onchange='quantity_calculate(" + count + ");' id='price_item_" + count + "' class='common_rate price_item" + count + " form-control text-right' required placeholder='0.00' min='0' tabindex='" + tab4 + "'/></td><td><input type='text' name='tax[]' id='gst_" + count + "' class='gst_" + count + " form-control text-right' required readonly tabindex='" + tab4 + "'/></td><td><input type='text' name='discount[]' onkeyup='quantity_calculate(" + count + ");' onchange='quantity_calculate(" + count + ");' id='discount_" + count + "' class='form-control text-right common_discount' placeholder='0.00' min='0' tabindex='" + tab5 + "' /><input type='hidden' value='' name='discount_type' id='discount_type_" + count + "'></td><td class='text-right'><input class='common_total_price total_price form-control text-right' type='text' name='total_price[]' id='total_price_" + count + "' value='0.00' readonly='readonly'/></td><td>"+tbfild+"<input type='hidden' id='all_discount_" + count + "' class='total_discount dppr' name='discount_amount[]'/><button tabindex='" + tab5 + "' style='text-align: right;' class='btn btn-danger' type='button' value='Delete' onclick='deleteRow(this)'><i class='fa fa-close'></i></button></td>",
                 document.getElementById(t).appendChild(e),
                 document.getElementById(a).focus(),
                 document.getElementById("add_invoice_item").setAttribute("tabindex", tab6);
@@ -65,6 +65,9 @@ function quantity_calculate(item) {
     var total_discount = $("#total_discount_" + item).val();
     var taxnumber = $("#txfieldnum").val();
     var dis_type = $("#discount_type_" + item).val();
+    var gst = $("#gst_"+item).val();
+    
+
     if (parseInt(quantity) > parseInt(available_quantity)) {
         var message = "You can Sale maximum " + available_quantity + " Items";
         alert(message);
@@ -73,13 +76,14 @@ function quantity_calculate(item) {
         $("#total_price_" + item).val(0);
         for(var i=0;i<taxnumber;i++){
         $("#all_tax"+i+"_" + item).val(0);
-           quantity_calculate(item);
+            (item);
     }
     }
 
 if (quantity > 0 || discount > 0) {
         if (dis_type == 1) {
-            var price = quantity * price_item;
+            var price_1 = quantity * price_item * gst/100;
+            var price = quantity * price_item+price_1;
             var dis = +(price * discount / 100);
             $("#all_discount_" + item).val(dis);
             //Total price calculate per product
@@ -545,6 +549,7 @@ $(document).ready(function(){
         var discount_type = 'discount_type_'+sl;
         var csrf_test_name = $('[name="csrf_test_name"]').val();
         var base_url = $("#base_url").val();
+        var gst = 'gst_'+sl;
 
     // Auto complete
     var options = {
@@ -592,6 +597,7 @@ $(document).ready(function(){
                            $('.'+txclass).val(obj.taxdta[i]);
                             }
                             $('.'+priceClass).val(obj.price);
+                            $('.'+gst).val(obj.tax);
                             $('.'+available_quantity).val(obj.total_product.toFixed(2,2));
                             $('.'+unit).val(obj.unit);
                             $('.'+tax).val(obj.tax);

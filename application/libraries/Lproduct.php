@@ -15,6 +15,7 @@ class Lproduct {
         $company_info = $CI->Products->retrieve_company();
         $data['total_product']    = $CI->Products->count_product();
         $data['company_info']     = $company_info;
+       
         $productList = $CI->parser->parse('product/product',$data,true);
         return $productList;
     }
@@ -98,6 +99,9 @@ class Lproduct {
             $data['serial_no']        = $product_detail[0]['serial_no'];
             $data['product_model']    = $product_detail[0]['product_model'];
             $data['product_details']  = $product_detail[0]['product_details'];
+            $data['tax']  = $product_detail[0]['tax'];
+            $data['sgst']  = $product_detail[0]['sgst'];
+            $data['cgst']  = $product_detail[0]['cgst'];
             $data['pr_details']       = $product_detail;
             $data['image']            = $product_detail[0]['image'];
             $data['unit']             = $product_detail[0]['unit'];

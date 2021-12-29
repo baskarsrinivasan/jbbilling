@@ -144,7 +144,38 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="col-sm-6">
+                         <div class="form-group row">
+                            <label for="tax" class="col-sm-4 col-form-label">GST <i class="text-danger"></i></label>
+                            <div class="col-sm-7">
+                                
+                                <select class="form-control gst" name="tax">
+                                    <option>Select</option>
+                                    <option value="5" <?php if($tax=='5') { echo 'selected'; }?>>5</option>
+                                    <option value="12" <?php if($tax=='12') { echo 'selected'; }?>>12</option>
+                                    <option value="18" <?php if($tax=='18') { echo 'selected'; }?>>18</option>
+                                </select>
+                              <!-- <input type="text" name="tax<?php echo $i;?>" class="form-control" value="<?php echo number_format($taxss['default_value'], 2, '.', ',');?>"> -->
+                            </div>
+                            <div class="col-sm-1"> <i class="text-success">%</i></div>
+                            
+                        </div>
+                        <div class="form-group row">
+                            <label for="tax" class="col-sm-4 col-form-label">SGST <i class="text-danger"></i></label>
+                            <div class="col-sm-7">
+                            <input type="text" name="sgst" class="form-control sgst" value="<?php echo $sgst;?>" readonly>
+                            </div>
+                            <div class="col-sm-1"> <i class="text-success">%</i></div>
+                            
+                        </div>
+                        <div class="form-group row">
+                            <label for="tax" class="col-sm-4 col-form-label">CGST <i class="text-danger"></i></label>
+                            <div class="col-sm-7">
+                            <input type="text" name="cgst" class="form-control cgst" value="<?php echo $cgst;?>" readonly>
+                            </div>
+                            <div class="col-sm-1"> <i class="text-success">%</i></div>
+                            
+                        </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
@@ -158,23 +189,7 @@
                                 </div> 
                             </div>
                         </div> 
-                          <?php 
-                            $i=0;
-                            foreach ($taxfield as $txs) {
-                                $tax = 'tax'.$i;
-                                ?>
-                        <div class="row">
-                            <div class="col-sm-6">
-                         <div class="form-group row">
-                            <label for="tax" class="col-sm-4 col-form-label"><?php echo $txs['tax_name']; ?> <i class="text-danger"></i></label>
-                            <div class="col-sm-7">
-                              <input type="text" name="tax<?php echo $i;?>" class="form-control" value="<?php echo  number_format($pr_details[0][$tax]*100, 2, '.', ',');?>">
-                            </div>
-                            <div class="col-sm-1"> <i class="text-success">%</i></div>
-                        </div>
-                    </div>
-                </div>
-                       <?php $i++;}?>
+                         
 
                         <div class="table-responsive product-supplier">
                             <table class="table table-bordered table-hover"  id="product_table">

@@ -22,7 +22,7 @@
            
 
 
-            newdiv.innerHTML ='<td class="span3 supplier"><input type="text" name="product_name" required="" class="form-control product_name productSelection" onkeypress="product_pur_or_list('+ count +');" placeholder="Product Name" id="product_name_'+ count +'" tabindex="'+tab1+'" > <input type="hidden" class="autocomplete_hidden_value product_id_'+ count +'" name="product_id[]" id="SchoolHiddenId"/>  <input type="hidden" class="sl" value="'+ count +'">  </td>  <td class="wt"> <input type="text" id="available_quantity_'+ count +'" class="form-control text-right stock_ctn_'+ count +'" placeholder="0.00" readonly/> </td><td class="text-right"><input type="text" name="product_quantity[]" tabindex="'+tab2+'" required  id="cartoon_'+ count +'" class="form-control text-right store_cal_' + count + '" onkeyup="calculate_store(' + count + ');" onchange="calculate_store(' + count + ');" placeholder="0.00" value="" min="0"/>  </td><td class="test"><input type="text" name="product_rate[]" onkeyup="calculate_store('+ count +');" onchange="calculate_store('+ count +');" id="product_rate_'+ count +'" class="form-control product_rate_'+ count +' text-right" placeholder="0.00" value="" min="0" tabindex="'+tab3+'"/></td><td class="text-right"><input class="form-control total_price text-right total_price_'+ count +'" type="text" name="total_price[]" id="total_price_'+ count +'" value="0.00" readonly="readonly" /> </td><td> <input type="hidden" id="total_discount_1" class="" /><input type="hidden" id="all_discount_1" class="total_discount" /><button style="text-align: right;" class="btn btn-danger red" type="button"  onclick="deleteRow(this)" tabindex="8"><i class="fa fa-close"></i></button></td>';
+            newdiv.innerHTML ='<td class="span3 supplier"><input type="text" name="product_name" required="" class="form-control product_name productSelection" onkeypress="product_pur_or_list('+ count +');" placeholder="Product Name" id="product_name_'+ count +'" tabindex="'+tab1+'" > <input type="hidden" class="autocomplete_hidden_value product_id_'+ count +'" name="product_id[]" id="SchoolHiddenId"/>  <input type="hidden" class="sl" value="'+ count +'">  </td>  <td class="wt"> <input type="text" id="available_quantity_'+ count +'" class="form-control text-right stock_ctn_'+ count +'" placeholder="0.00" readonly/> </td><td class="text-right"><input type="text" name="product_quantity[]" tabindex="'+tab2+'" required  id="cartoon_'+ count +'" class="form-control text-right store_cal_' + count + '" onkeyup="calculate_store(' + count + ');" onchange="calculate_store(' + count + ');" placeholder="0.00" value="" min="0"/>  </td><td class="test"><input type="text" name="product_rate[]" onkeyup="calculate_store('+ count +');" onchange="calculate_store('+ count +');" id="product_rate_'+ count +'" class="form-control product_rate_'+ count +' text-right" placeholder="0.00" value="" min="0" tabindex="'+tab3+'"/></td><td class="test"><input type="text" name="tax[]" id="gst_'+ count +'" class="form-control gst_'+ count +' text-right" placeholder="0.00" value="" min="0" tabindex="'+tab3+'"/></td><td class="text-right"><input class="form-control total_price text-right total_price_'+ count +'" type="text" name="total_price[]" id="total_price_'+ count +'" value="0.00" readonly="readonly" /> </td><td> <input type="hidden" id="total_discount_1" class="" /><input type="hidden" id="all_discount_1" class="total_discount" /><button style="text-align: right;" class="btn btn-danger red" type="button"  onclick="deleteRow(this)" tabindex="8"><i class="fa fa-close"></i></button></td>';
             document.getElementById(divName).appendChild(newdiv);
             document.getElementById(tabin).focus();
             document.getElementById("add_invoice_item").setAttribute("tabindex", tab5);
@@ -49,8 +49,10 @@
         var dis = 0;
         var item_ctn_qty    = $("#cartoon_"+sl).val();
         var vendor_rate = $("#product_rate_"+sl).val();
+        var gst = $("#gst_"+sl).val();
 
-        var total_price     = item_ctn_qty * vendor_rate;
+        var gst_price     = item_ctn_qty * vendor_rate * gst/100;
+        var total_price     = item_ctn_qty * vendor_rate + gst_price;
         $("#total_price_"+sl).val(total_price.toFixed(2));
 
        
@@ -105,6 +107,8 @@ function full_paid() {
     function product_pur_or_list(sl) {
 
     var supplier_id = $('#supplier_id').val();
+    
+   
     var base_url = $('#base_url').val();
     var csrf_test_name = $('[name="csrf_test_name"]').val();
     if ( supplier_id == 0) {
@@ -117,6 +121,7 @@ function full_paid() {
         minLength: 0,
         source: function( request, response ) {
             var product_name = $('#product_name_'+sl).val();
+           
         $.ajax( {
           url: base_url + "Cpurchase/product_search_by_supplier",
           method: 'post',
@@ -150,6 +155,7 @@ function full_paid() {
 
             var available_quantity    = 'available_quantity_'+sl;
             var product_rate    = 'product_rate_'+sl;
+            var gst= 'gst_'+sl;
 
            
          
@@ -165,6 +171,7 @@ function full_paid() {
                     obj = JSON.parse(data);
                    $('#'+available_quantity).val(obj.total_product);
                     $('#'+product_rate).val(obj.supplier_price);
+                    $('#'+gst).val(obj.tax);
                   
                 } 
             });

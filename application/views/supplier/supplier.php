@@ -73,6 +73,7 @@
                           <thead>
                               <tr>
                                   <th><?php echo display('supplier_name') ?></th>
+                                  <th>GST NUMBER</th>
                                   <th><?php echo display('address') ?></th>
                                   <th><?php echo display('mobile') ?></th>
                                   <th><?php echo display('phone'); ?></th>

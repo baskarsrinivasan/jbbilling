@@ -81,15 +81,17 @@
                                     ?>" class="" alt="">
                                     <br>
                                      
-                                    <span class="label label-success-outline m-r-15 p-10" ><?php echo display('billing_from') ?></span>
+                                    <span class="label label-success-outline m-r-15 p-10" ><?php echo display('billing_from') ?></span><br/>
                                     <address>
-                                        <strong class="companyname" >{company_name}</strong><br>
+                                        <strong class="" >{company_name}</strong><br>
                                         {address}<br>
                                         <abbr><b><?php echo display('mobile') ?>:</b></abbr> {mobile}<br>
                                         <abbr><b><?php echo display('email') ?>:</b></abbr> 
                                         {email}<br>
                                         <abbr><b><?php echo display('website') ?>:</b></abbr> 
                                         {website}<br>
+										<abbr><b>GSTIN Number:</b></abbr> 
+                                        {gstin_number}<br>
                                          {/company_info}
                                         
                                     </address>
@@ -100,16 +102,18 @@
                                 
                                  
                                 <div class="col-sm-4 text-left invoice-details-billing">
-                                    <h2 class="m-t-0"><?php echo display('purchase') ?></h2>
-                                    <div><?php echo display('invoice_no') ?>: {chalan_no}</div>
-                                    <div class="m-b-15"><?php echo display('billing_date') ?>: {final_date}</div>
-
-                                    <span class="label label-success-outline m-r-15"><?php echo display('billing_to') ?></span>
-
-                                    <address class="details-address">  
-                                        <strong class="companyname">{supplier_name} </strong><br>
-                                       
+                                    <!-- <h2 class="m-t-0"><?php echo display('purchase') ?></h2> -->
+									<span class="label label-success-outline m-r-15"><?php echo display('billing_to') ?></span>
+									<address class="details-address">  
+                                        <strong class="">{supplier_name} </strong><br/>
+                                        <strong class="">GSTIN NUMBER:</strong> {supplier_gst_number}</br/>
                                     </address>
+                                    <?php echo display('invoice_no') ?>: {chalan_no}<br>
+                                   <?php echo display('billing_date') ?>: {final_date}<br/>
+								  
+                                   
+
+                                   
                                 </div>
                             </div> 
 
@@ -124,6 +128,7 @@
 										<th><?php echo display('product_name') ?></th>
 										<th class="text-center"><?php echo display('quantity') ?></th>
 										<th class="text-center"><?php echo display('rate') ?></th>
+										<th class="text-center">GSTIN</th>
 										<th class="text-center"><?php echo display('total_ammount') ?></th>
 									</tr>
 								</thead>
@@ -141,6 +146,7 @@
 										</td>
 										<td class="text-right">{quantity}</td>
 										<td class="text-right"><?php echo (($position==0)?"$currency {rate}":"{rate} $currency") ?></td>
+										<td class="text-right">{tax} % </td>
 										<td class="text-right"><?php echo (($position==0)?"$currency {total_amount}":"{total_amount} $currency") ?></td>
 									</tr>
 								{/purchase_all_data}
@@ -150,27 +156,32 @@
 								</tbody>
 								<tfoot>
 									<tr>
+										<td></td>
 										<td class="text-right" colspan="4"><b><?php echo display('total') ?>:</b></td>
 										<td  class="text-right"><b><?php echo (($position==0)?"$currency {total}":"{total} $currency") ?></b></td>
 									</tr>
 									 <?php if($discount > 0){?>
 									<tr>
+									<td></td>
 										<td class="text-right" colspan="4"><b><?php echo display('discounts') ?>:</b></td>
 										<td  class="text-right"><b><?php echo (($position==0)?"$currency {discount}":"{discount} $currency") ?></b></td>
 									</tr>
 								<?php }?>
 									<tr>
+									<td></td>
 										<td class="text-right" colspan="4"><b><?php echo display('grand_total') ?>:</b></td>
 										<td  class="text-right"><b><?php echo (($position==0)?"$currency {sub_total_amount}":"{sub_total_amount} $currency") ?></b></td>
 									</tr>
 									 <?php if($paid_amount > 0){?>
 									<tr>
+									<td></td>
 										<td class="text-right" colspan="4"><b><?php echo display('paid_amount') ?>:</b></td>
 										<td  class="text-right"><b><?php echo (($position==0)?"$currency {paid_amount}":"{paid_amount} $currency") ?></b></td>
 									</tr>
 								<?php }?>
                               <?php if($due_amount > 0){?>
 									<tr>
+									<td></td>
 										<td class="text-right" colspan="4"><b><?php echo display('due_amount') ?>:</b></td>
 										<td  class="text-right"><b><?php echo (($position==0)?"$currency {due_amount}":"{due_amount} $currency") ?></b></td>
 									</tr>

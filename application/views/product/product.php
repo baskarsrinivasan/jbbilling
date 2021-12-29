@@ -80,7 +80,9 @@
                                         <th><?php echo display('supplier_name') ?></th>
                                         <th><?php echo display('price') ?></th>
                                         <th><?php echo display('supplier_price') ?></th>
+                                        <th>GST</th>
                                         <th><?php echo display('image') ?>s</th>
+                                       
                                         <th><?php echo display('action') ?> 
                                         </th>
                                     </tr>

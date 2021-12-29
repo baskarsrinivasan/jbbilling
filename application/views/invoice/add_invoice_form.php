@@ -182,7 +182,7 @@
                                         <th class="text-center"><?php echo display('unit') ?></th>
                                         <th class="text-center"><?php echo display('quantity') ?> <i class="text-danger">*</i></th>
                                         <th class="text-center"><?php echo display('rate') ?> <i class="text-danger">*</i></th>
-
+                                        <th class="text-center">GST% <i class="text-danger">*</i></th>
                                         <?php if ($discount_type == 1) { ?>
                                             <th class="text-center invoice_fields"><?php echo display('discount_percentage') ?> %</th>
                                         <?php } elseif ($discount_type == 2) { ?>
@@ -222,8 +222,12 @@
                                         <td>
                                             <input type="text" name="product_quantity[]" required="" onkeyup="quantity_calculate(1);" onchange="quantity_calculate(1);" class="total_qntt_1 form-control text-right" id="total_qntt_1" placeholder="0.00" min="0" tabindex="8"  value="1" />
                                         </td>
+                                        
                                         <td class="invoice_fields">
                                             <input type="text" name="product_rate[]" id="price_item_1" class="price_item1 price_item form-control text-right" tabindex="9" required="" onkeyup="quantity_calculate(1);" onchange="quantity_calculate(1);" placeholder="0.00" min="0" />
+                                        </td>
+                                        <td class="invoice_fields">
+                                            <input type="text" name="tax[]" id="gst_1" class="form-control text-right gst_1" value='' readonly/>
                                         </td>
                                         <!-- Discount -->
                                         <td>
@@ -258,6 +262,7 @@
 
                                          <button  class='btn btn-danger text-right' type='button' value='Delete' onclick='deleteRow(this)'><i class='fa fa-close'></i></button>
                                         </td>
+                                        
                                     </tr>
                                 </tbody>
                                 <tfoot>
@@ -266,7 +271,8 @@
                                 <center><label  for="details" class="  col-form-label text-center"><?php echo display('invoice_details') ?></label></center>
                                 <textarea name="inva_details" id="details" class="form-control" placeholder="<?php echo display('invoice_details') ?>" tabindex="12"></textarea>
                                 </td>
-                                    <td class="text-right" colspan="1"><b><?php echo display('invoice_discount') ?>:</b></td>
+                                <td></td>
+                                    <td class="" colspan="1"><b><?php echo display('invoice_discount') ?>:</b></td>
                                     <td class="text-right">
                                         <input type="text" onkeyup="quantity_calculate(1);"  onchange="quantity_calculate(1);" id="invoice_discount" class="form-control text-right total_discount" name="invoice_discount" placeholder="0.00"   tabindex="13"/>
                                         <input type="hidden" id="txfieldnum">
@@ -274,7 +280,8 @@
                                     <td><a  id="add_invoice_item" class="btn btn-info" name="add-invoice-item"  onClick="addInputField('addinvoiceItem');"  tabindex="11"><i class="fa fa-plus"></i></a></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right" colspan="1"><b><?php echo display('total_discount') ?>:</b></td>
+                                    <td></td>
+                                    <td class="" colspan="1"><b><?php echo display('total_discount') ?>:</b></td>
                                     <td class="text-right">
                                         <input type="text" id="total_discount_ammount" class="form-control text-right" name="total_discount" value="0.00" readonly="readonly" />
                                     </td>
@@ -282,7 +289,8 @@
                                     <?php $x=0;
                                      foreach($taxes as $taxfldt){?>
                                     <tr class="hideableRow hiddenRow">
-                                       
+                                   
+                                    
                                 <td class="text-right" colspan="8"><b><?php echo html_escape($taxfldt['tax_name']) ?></b></td>
                                 <td class="text-right">
                                     <input id="total_tax_ammount<?php echo $x;?>" tabindex="-1" class="form-control text-right valid totalTax" name="total_tax<?php echo $x;?>" value="0.00" readonly="readonly" aria-invalid="false" type="text">
@@ -295,6 +303,8 @@
                                  
                     <tr>
                                     <tr>
+                                        
+                                    <td></td>
                                 <td class="text-right" colspan="8"><b><?php echo display('total_tax') ?>:</b></td>
                                 <td class="text-right">
                                     <input id="total_tax_amount" tabindex="-1" class="form-control text-right valid" name="total_tax" value="0.00" readonly="readonly" aria-invalid="false" type="text">
@@ -305,31 +315,35 @@
                                 </tr>
                                
                                  <tr>
+                                 <td></td>
                                     <td class="text-right" colspan="8"><b><?php echo display('shipping_cost') ?>:</b></td>
                                     <td class="text-right">
                                         <input type="text" id="shipping_cost" class="form-control text-right" name="shipping_cost" onkeyup="quantity_calculate(1);"  onchange="quantity_calculate(1);"  placeholder="0.00" tabindex="14" />
                                     </td>
                                 </tr>
                                 <tr>
+                                <td></td>
                                     <td colspan="8"  class="text-right"><b><?php echo display('grand_total') ?>:</b></td>
                                     <td class="text-right">
                                         <input type="text" id="grandTotal" class="form-control text-right" name="grand_total_price" value="0.00" readonly="readonly" />
                                     </td>
                                 </tr>
                                  <tr>
+                                 <td></td>
                                     <td colspan="8"  class="text-right"><b><?php echo display('previous'); ?>:</b></td>
                                     <td class="text-right">
                                         <input type="text" id="previous" class="form-control text-right" name="previous" value="0.00" readonly="readonly" />
                                     </td>
                                 </tr>
                                 <tr>
+                                <td></td>
                                     <td colspan="8"  class="text-right"><b><?php echo display('net_total'); ?>:</b></td>
                                     <td class="text-right">
                                         <input type="text" id="n_total" class="form-control text-right" name="n_total" value="0" readonly="readonly" placeholder="" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    
+                                <td></td>
                                     <td class="text-right" colspan="8"><b><?php echo display('paid_ammount') ?>:</b></td>
                                     <td class="text-right">
                                          <input type="hidden" name="baseUrl" class="baseUrl" value="<?php echo base_url(); ?>"/>
@@ -339,21 +353,27 @@
                                 </tr>
                                 <tr>
                                    
-
+                                <td></td>
                                     <td class="text-right" colspan="8"><b><?php echo display('due') ?>:</b></td>
                                     <td class="text-right">
                                         <input type="text" id="dueAmmount" class="form-control text-right" name="due_amount" value="0.00" readonly="readonly"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                     <td align="center">
+                                
+                                   
+                                    <td></td>
+                                    <td colspan="8"  class="text-right"><b><?php echo display('change'); ?>:</b></td>
+                                    <td class="text-right">
+                                        <input type="text" id="change" class="form-control text-right" name="change" value="0" readonly="readonly" placeholder="" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                <td colspan="8"  class="text-right"><b></td>
+                                <td colspan="4" class="text-right">
                                         <input type="button" id="full_paid_tab" class="btn btn-warning" value="<?php echo display('full_paid') ?>" tabindex="16" onClick="full_paid()"/>
 
                                         <input type="submit" id="add_invoice" class="btn btn-success" name="add-invoice" value="<?php echo display('submit') ?>" tabindex="17"/>
-                                    </td>
-                                    <td colspan="7"  class="text-right"><b><?php echo display('change'); ?>:</b></td>
-                                    <td class="text-right">
-                                        <input type="text" id="change" class="form-control text-right" name="change" value="0" readonly="readonly" placeholder="" />
                                     </td>
                                 </tr>
                                 </tfoot>

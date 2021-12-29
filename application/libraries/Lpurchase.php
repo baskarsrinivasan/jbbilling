@@ -235,6 +235,9 @@ class Lpurchase {
             'purchase_id'      => $purchase_detail[0]['purchase_id'],
             'purchase_details' => $purchase_detail[0]['purchase_details'],
             'supplier_name'    => $purchase_detail[0]['supplier_name'],
+            'supplier_gst_number'    => $purchase_detail[0]['gstin_number'],
+            'tax'    => $purchase_detail[0]['tax'],
+            
             'final_date'       => $purchase_detail[0]['convert_date'],
             'sub_total_amount' => number_format($purchase_detail[0]['grand_total_amount'], 2, '.', ','),
             'chalan_no'        => $purchase_detail[0]['chalan_no'],

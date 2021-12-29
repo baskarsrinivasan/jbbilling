@@ -272,6 +272,7 @@ class Purchases extends CI_Model {
             'status'             => 1,
             'bank_id'            =>  $this->input->post('bank_id',TRUE),
             'payment_type'       =>  $this->input->post('paytype',TRUE),
+           
         );
         //Supplier Credit
         $purchasecoatran = array(
@@ -365,7 +366,7 @@ class Purchases extends CI_Model {
        //new end
        
         $this->db->insert('product_purchase', $data);
-       
+          // echo $this->db->last_query();die();
         $this->db->insert('acc_transaction',$coscr);
         $this->db->insert('acc_transaction',$purchasecoatran);  
         $this->db->insert('acc_transaction',$expense);
@@ -387,6 +388,7 @@ class Purchases extends CI_Model {
         $quantity = $this->input->post('product_quantity',TRUE);
         $t_price = $this->input->post('total_price',TRUE);
         $discount = $this->input->post('discount',TRUE);
+        $tax = $this->input->post('tax',TRUE);
 
         for ($i = 0, $n = count($p_id); $i < $n; $i++) {
             $product_quantity = $quantity[$i];
@@ -394,6 +396,7 @@ class Purchases extends CI_Model {
             $product_id = $p_id[$i];
             $total_price = $t_price[$i];
             $disc = $discount[$i];
+            $taxc = $tax[$i];
 
             $data1 = array(
                 'purchase_detail_id' => $this->generator(15),
@@ -403,6 +406,7 @@ class Purchases extends CI_Model {
                 'rate'               => $product_rate,
                 'total_amount'       => $total_price,
                 'discount'           => $disc,
+                'tax'               =>$taxc,
                 'status'             => 1
             );
 

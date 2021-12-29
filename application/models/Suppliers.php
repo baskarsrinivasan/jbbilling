@@ -100,6 +100,7 @@ class Suppliers extends CI_Model {
             $data[] = array( 
                 'sl'               =>$sl,
                 'supplier_name'    =>html_escape($record->supplier_name),
+                'gstin_number'    =>html_escape($record->gstin_number),
                 'address'          =>html_escape($record->address),
                 'address2'         =>html_escape($record->address2),
                 'mobile'           =>html_escape($record->mobile),
