@@ -27,11 +27,12 @@ $position = $currency_details[0]['currency_position'];
     <div class="firts_section" style="">
         <div class="first_section_left"  style="width: 38%; display: inline-block;">
            <img src="<?php  echo $currency_details[0]['invoice_logo']; ?>" class="img-responsive" alt="">
-            <address>
+            <address style="font-size:15px">
                 <strong style="font-size: 20px; "><?php echo html_escape($company_info[0]['company_name']); ?></strong><br>
                 <abbr><b><?php echo display('mobile') ?>:</b></abbr> <?php echo html_escape($company_info[0]['mobile']); ?><br>
                 <abbr><b><?php echo display('email') ?>:</b></abbr> <?php echo html_escape($company_info[0]['email']); ?><br>
                 <abbr><b><?php echo display('website') ?>:</b></abbr> <?php echo html_escape($company_info[0]['website']); ?><br>
+                <abbr><b>GST:</b></abbr> <?php echo html_escape($company_info[0]['gstin_number']); ?><br>
             </address>
             <br>
         </div>
@@ -88,6 +89,7 @@ $position = $currency_details[0]['currency_position'];
                                             <?php } ?>
                                        
                                             <th class="text-right"><?php echo display('rate') ?></th>
+                                            <th class="text-right">GST%</th>
                                             <th class="text-right"><?php echo display('ammount') ?></th>
                                         </tr>
                     </thead>
@@ -117,7 +119,11 @@ $position = $currency_details[0]['currency_position'];
                                                                 echo (($position == 0) ? "$currency $rate" : "$rate $currency");
                                                                 ?>
                                                             </td>
-                                                            
+                                                            <td align="right" style="padding-right:10px;">
+                                                                <?php
+                                                                echo $item['tax'];
+                                                                ?>
+                                                            </td>
                                                             <td align="right" style="padding-right:10px;">
                                                                 <?php
                                                                 $amount += $item['total_price'];

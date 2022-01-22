@@ -96,6 +96,7 @@ class Invoices extends CI_Model {
          $this->db->where($searchQuery);
        
          $this->db->order_by($columnName, $columnSortOrder);
+         
          $this->db->limit($rowperpage, $start);
          $records = $this->db->get()->result();
          $data = array();

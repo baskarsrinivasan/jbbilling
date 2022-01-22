@@ -61,9 +61,9 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                     ?>" class="img-bottom-m" alt="" >
                                     <br>
                                     <span class="label label-success-outline m-r-15 p-10" ><?php echo display('billing_from') ?></span>
-                                    <address class="margin-top10">
-                                        <strong class="company_name_p">{company_name}</strong><br>
-                                        {address}<br>
+                                    <address class="margin-top10" style="font-size:15px">
+                                        <strong class="" style="font-size:13px;max-height:100px;" >{company_name}</strong><br>
+                                        <strong class="company_name_p" style="font-size:15px">{address}</strong><br>
                                         <abbr><b><?php echo display('mobile') ?>:</b></abbr> {mobile}<br>
                                         <abbr><b><?php echo display('email') ?>:</b></abbr> 
                                         {email}<br>
@@ -86,8 +86,8 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                     
 
                                     
-                                    <address class="">  
-                                        <strong  class="" >{customer_name} </strong><br>
+                                    <address class="margin-top10" style="font-size:15px">  
+                                        <strong  class="company_name_p" style="font-size:15px">{customer_name} </strong>
                                         <?php if ($customer_address) { ?>
                                             {customer_address}
                                         <?php } ?>
@@ -101,9 +101,13 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                             <abbr><b><?php echo display('email') ?>:</b></abbr> 
                                             {customer_email}
                                         <?php } ?>
+                                        <br/><abbr><b><?php echo display('invoice_no') ?>:</b></abbr> 
+                                        {invoice_no}
+                                        <br/><abbr><b><?php echo display('billing_date') ?>:</b></abbr> 
+                                        {final_date}
                                     </address>
-                                    <div><?php echo display('invoice_no') ?>: {invoice_no}</div>
-                                    <div class="m-b-15"><?php echo display('billing_date') ?>: {final_date}</div>
+                                    
+                                    <!-- <strong class="">GSTIN NUMBER:</strong> {supplier_gst_number}</br/> -->
                                 </div>
                             </div> 
 

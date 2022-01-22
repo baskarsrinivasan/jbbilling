@@ -682,6 +682,7 @@ function ClearScreen() {
 //security page js end
 /*stock list js*/
 $(document).ready(function() { 
+  
       "use strict";
    var CSRF_TOKEN = $('[name="csrf_test_name"]').val();
    var base_url = $("#base_url").val();
@@ -730,6 +731,7 @@ $(document).ready(function() {
              { data: 'product_name' },
              { data: 'product_model',class:"text-center" },
              { data: 'sales_price' ,class:"text-right",render: $.fn.dataTable.render.number( ',', '.', 2, currency ) },
+             { data: 'tax' ,class:"text-right"},
              { data: 'purchase_p' ,class:"text-right",render: $.fn.dataTable.render.number( ',', '.', 2, currency ) },
              { data: 'totalPurchaseQnty' ,class:"text-right" },
              { data: 'totalSalesQnty' ,class:"text-right" },

@@ -47,7 +47,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
         }
         ?>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-12">
                 <div class="panel panel-bd">
                     <div id="printableArea">
                         <div class="panel-body">
@@ -108,6 +108,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                             echo '';
                                         } ?></td>
                                         <td align="center"><?php echo display('rate'); ?></td>
+                                        <td align="center">GST%</td>
                                         <td align="center"><?php echo display('ammount'); ?></td>
                                     </tr>
                            
@@ -147,6 +148,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                          ?>
                                     </nobr>
                                     </td>
+                                    <td><?php echo html_escape($invoice_data['tax']);?></td>
                                     <td align="right">
                                     <nobr>
                                         <?php 

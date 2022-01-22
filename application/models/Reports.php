@@ -193,7 +193,7 @@ class reports extends CI_Model {
          $this->db->from('product_information a');
           if($searchValue != ''){
          $this->db->where($searchQuery);
-     }
+         }
         $this->db->group_by('a.product_id');
          $records = $this->db->get()->num_rows();
          $totalRecords = $records;
@@ -230,18 +230,21 @@ class reports extends CI_Model {
 
             $sprice = (!empty($record->price)?$record->price:0);
             $pprice = (!empty($stockout->purchaseprice)?sprintf('%0.2f',$stockout->purchaseprice):0); 
+            
+         
             $stock =  (!empty($stockout->totalPurchaseQnty)?$stockout->totalPurchaseQnty:0)-(!empty($stockin->totalSalesQnty)?$stockin->totalSalesQnty:0);
             $data[] = array( 
                 'sl'            =>   $sl,
                 'product_name'  =>  $record->product_name,
                 'product_model' =>  $record->product_model,
                 'sales_price'   =>  sprintf('%0.2f',$sprice),
+                'tax' =>  $record->tax,
                 'purchase_p'    =>  $pprice,
                 'totalPurchaseQnty'=>$stockout->totalPurchaseQnty,
                 'totalSalesQnty'=>  $stockin->totalSalesQnty,
                 'stok_quantity' => sprintf('%0.2f',$stock),
-                'total_sale_price'=> ($stockout->totalPurchaseQnty-$stockin->totalSalesQnty)*$sprice,
-                'purchase_total' =>  ($stockout->totalPurchaseQnty-$stockin->totalSalesQnty)*$pprice,
+                'total_sale_price'=> ($stockout->totalPurchaseQnty-$stockin->totalSalesQnty)*$sprice+($stockout->purchaseprice*$record->tax/100),
+                'purchase_total' =>  ($stockout->totalPurchaseQnty-$stockin->totalSalesQnty)*$pprice+($stockout->purchaseprice*$record->tax/100),
             ); 
             $sl++;
          }

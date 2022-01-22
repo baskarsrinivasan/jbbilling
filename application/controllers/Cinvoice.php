@@ -374,6 +374,7 @@ class Cinvoice extends CI_Controller {
         'invoice_id'        => $invoice_detail[0]['invoice_id'],
         'customer_info'     => $invoice_detail,
         'invoice_no'        => $invoice_detail[0]['invoice'],
+        'tax'        => $invoice_detail[0]['tax'],
         'customer_name'     => $invoice_detail[0]['customer_name'],
         'customer_address'  => $invoice_detail[0]['customer_address'],
         'customer_mobile'   => $invoice_detail[0]['customer_mobile'],

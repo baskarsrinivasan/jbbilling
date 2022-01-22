@@ -61,6 +61,7 @@
                                     <th class="text-center"><?php echo display('product_name') ?></th>
                                     <th class="text-center"><?php echo display('product_model') ?></th>
                                     <th class="text-center"><?php echo display('sell_price') ?></th>
+                                    <th class="text-center">GST IN</th>
                                     <th class="text-center"><?php echo display('purchase_price') ?></th>
                                     <th class="text-center"><?php echo display('in_qnty') ?></th>
                                     <th class="text-center"><?php echo display('out_qnty') ?></th>
