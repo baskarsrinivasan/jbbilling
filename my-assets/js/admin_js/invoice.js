@@ -56,6 +56,7 @@ function addInputField(t) {
 //Quantity calculat
     "use strict";
 function quantity_calculate(item) {
+    
     var quantity = $("#total_qntt_" + item).val();
     var available_quantity = $(".available_quantity_" + item).val();
     var price_item = $("#price_item_" + item).val();
@@ -82,8 +83,8 @@ function quantity_calculate(item) {
 
 if (quantity > 0 || discount > 0) {
         if (dis_type == 1) {
-            
-            var price = quantity * price_item;
+            var price_1 = quantity * price_item * gst/100;
+            var price = quantity * price_item+price_1;
             var dis = +(price * discount / 100);
             $("#all_discount_" + item).val(dis);
             //Total price calculate per product

@@ -1290,7 +1290,7 @@ $(document).ready(function(){
               var gst=$(".gst").val();
               var get_gst_amount=gst*supplier_price/100;
               
-              var total_supplier_price=parseInt(get_gst_amount) + parseInt(supplier_price);
+              var total_supplier_price=parseFloat(get_gst_amount) + parseFloat(supplier_price);
             
               
               $(".supplier_price").val(total_supplier_price);

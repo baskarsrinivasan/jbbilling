@@ -167,7 +167,7 @@
                                             <input type="text" name="product_rate[]" onkeyup="quantity_calculate({sl});" onchange="quantity_calculate({sl});" value="{rate}" id="price_item_{sl}" class="price_item{sl} form-control text-right" min="0" tabindex="5" required="" placeholder="0.00"/>
                                         </td>
                                         <td>
-                                            <input type="text" name="tax[]"  value="{tax}" id="price_item_{sl}" class="price_item{sl} form-control text-right" min="0" tabindex="5" required="" placeholder="0.00" readonly/>
+                                            <input type="text" name="tax[]"  value="{tax}" id="gst_{sl}" class="gst_{sl} form-control text-right" min="0" tabindex="5" required="" placeholder="0.00" readonly/>
                                         </td>
                                         <!-- Discount -->
                                         <td>
