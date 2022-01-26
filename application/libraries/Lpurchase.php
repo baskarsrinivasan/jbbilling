@@ -168,6 +168,7 @@ class Lpurchase {
         $data = array(
             'title'         => display('purchase_edit'),
             'purchase_id'   => $purchase_detail[0]['purchase_id'],
+            'tax'   => $purchase_detail[0]['tax'],
             'chalan_no'     => $purchase_detail[0]['chalan_no'],
             'supplier_name' => $purchase_detail[0]['supplier_name'],
             'supplier_id'   => $purchase_detail[0]['supplier_id'],

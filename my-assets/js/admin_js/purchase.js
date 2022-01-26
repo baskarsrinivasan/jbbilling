@@ -49,10 +49,10 @@
         var dis = 0;
         var item_ctn_qty    = $("#cartoon_"+sl).val();
         var vendor_rate = $("#product_rate_"+sl).val();
-        var gst = $("#gst_"+sl).val();
+        // var gst = $("#gst_"+sl).val();
 
-        var gst_price     = item_ctn_qty * vendor_rate * gst/100;
-        var total_price     = item_ctn_qty * vendor_rate + gst_price;
+        // var gst_price     = item_ctn_qty * vendor_rate * gst/100;
+        var total_price     = item_ctn_qty * vendor_rate;
         $("#total_price_"+sl).val(total_price.toFixed(2));
 
        

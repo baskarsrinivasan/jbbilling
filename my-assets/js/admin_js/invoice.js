@@ -82,8 +82,8 @@ function quantity_calculate(item) {
 
 if (quantity > 0 || discount > 0) {
         if (dis_type == 1) {
-            var price_1 = quantity * price_item * gst/100;
-            var price = quantity * price_item+price_1;
+            
+            var price = quantity * price_item;
             var dis = +(price * discount / 100);
             $("#all_discount_" + item).val(dis);
             //Total price calculate per product

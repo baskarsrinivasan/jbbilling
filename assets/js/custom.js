@@ -1284,3 +1284,15 @@ $(document).ready(function(){
               $('.cgst').val(sgst);
               
             });
+            $(document).on('blur', '.supplier_price', function() {
+              var supplier_price=$(".supplier_price").val();
+              
+              var gst=$(".gst").val();
+              var get_gst_amount=gst*supplier_price/100;
+              
+              var total_supplier_price=parseInt(get_gst_amount) + parseInt(supplier_price);
+            
+              
+              $(".supplier_price").val(total_supplier_price);
+              
+            });

@@ -228,7 +228,7 @@
                                             </select>
                                         </td>
                                         <td class="">
-                                            <input type="text" tabindex="6" class="form-control text-right" name="supplier_price[]" placeholder="0.00"  required  min="0" value="{supplier_price}"/>
+                                            <input type="text" tabindex="6" class="form-control text-right supplier_price" name="supplier_price[]" placeholder="0.00"  required  min="0" value="{supplier_price}"/>
                                         </td>
 
                                         <td width="100"> <a  id="add_purchase_item" class="btn btn-info btn-sm" name="add-invoice-item" onClick="addpruduct('proudt_item');"  tabindex="9"/><i class="fa fa-plus-square" aria-hidden="true"></i></a> <a class="btn btn-danger btn-sm red"  value="<?php echo display('delete') ?>" onclick="deleteRow(this)" tabindex="10"><i class="fa fa-trash" aria-hidden="true"></i></a>
