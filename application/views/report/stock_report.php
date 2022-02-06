@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <input type="hidden" id="currency" value="{currency}" name="">
-                         <input type="hidden" id="total_stock" value="<?php echo $totalnumber;?>" name="">
+                         <input type="hidden" id="total_stock" value="" name="">
                     </div>
                 </div>
             </div>

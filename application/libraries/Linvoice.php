@@ -365,6 +365,7 @@ class Linvoice {
         'invoice_no'        => $invoice_detail[0]['invoice'],
         'customer_name'     => $invoice_detail[0]['customer_name'],
         'customer_address'  => $invoice_detail[0]['customer_address'],
+        'gst'  => $invoice_detail[0]['gst'],
         'customer_mobile'   => $invoice_detail[0]['customer_mobile'],
         'customer_email'    => $invoice_detail[0]['customer_email'],
         'final_date'        => $invoice_detail[0]['final_date'],

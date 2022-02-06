@@ -87,7 +87,8 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 
                                     
                                     <address class="margin-top10" style="font-size:15px">  
-                                        <strong  class="company_name_p" style="font-size:15px">{customer_name} </strong>
+                                        <strong  class="company_name_p" style="font-size:15px">{customer_name} </strong><br/>
+                                        <strong  class="company_name_p" style="font-size:15px"> GST TIN NUMBER:</strong> {gst}
                                         <?php if ($customer_address) { ?>
                                             {customer_address}
                                         <?php } ?>

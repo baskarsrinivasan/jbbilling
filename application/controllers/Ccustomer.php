@@ -148,6 +148,7 @@ class Ccustomer extends CI_Controller {
          $data = array(
             'customer_name'   => $this->input->post('customer_name',TRUE),
             'customer_address'=> $this->input->post('address',TRUE),
+            'gst'=> $this->input->post('gst',TRUE),
             'address2'        => $this->input->post('address2',TRUE),
             'customer_mobile' => $this->input->post('mobile',TRUE),
             'phone'           => $this->input->post('phone',TRUE),

@@ -78,7 +78,12 @@
                                 <input class="form-control" name ="customer_name" id="customer_name" type="text" placeholder="<?php echo display('customer_name') ?>"  required="" tabindex="1">
                             </div>
                         </div>
-
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-4 col-form-label">Gst Number</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name ="gst" id="gst" type="text" placeholder="Gst number" tabindex="2"> 
+                            </div>
+                        </div>
                        	<div class="form-group row">
                             <label for="email" class="col-sm-4 col-form-label"><?php echo display('customer_email') ?></label>
                             <div class="col-sm-8">
