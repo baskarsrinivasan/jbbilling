@@ -116,6 +116,21 @@
                                         <input class="form-control text-right" name="price" type="text" required="" placeholder="0.00" tabindex="5" min="0" value="{price}">
                                     </div>
                                 </div> 
+                                <div class="form-group row">
+                            <label for="tax" class="col-sm-4 col-form-label">Product Type <i class="text-danger"></i></label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="product_type">
+                                    <option>Select</option>
+                                    <option value="1"  <?php if($product_type=='1') { echo 'selected'; }?>>Featured Product</option>
+                                    <option value="2"  <?php if($product_type=='2') { echo 'selected'; }?>>Deals of the Day</option>
+                                    <option value="3"  <?php if($product_type=='3') { echo 'selected'; }?>>Trending Product</option>
+                                    <option value="4"  <?php if($product_type=='4') { echo 'selected'; }?>>Top Sales Product</option>
+                                </select>
+                              <!-- <input type="text" name="tax<?php echo $i;?>" class="form-control" value="<?php echo number_format($taxss['default_value'], 2, '.', ',');?>"> -->
+                            </div>
+                            
+                            
+                        </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group row">
@@ -145,6 +160,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
+                                
                          <div class="form-group row">
                             <label for="tax" class="col-sm-4 col-form-label">GST <i class="text-danger"></i></label>
                             <div class="col-sm-7">
@@ -188,6 +204,7 @@
                                     </div>
                                 </div> 
                             </div>
+                            
                         </div> 
                          
 

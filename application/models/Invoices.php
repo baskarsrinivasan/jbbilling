@@ -1002,6 +1002,7 @@ if(!empty($this->input->post('paid_amount',TRUE))){
         $total_amount  = $this->input->post('total_price',TRUE);
         $discount_rate = $this->input->post('discount_amount',TRUE);
         $discount_per  = $this->input->post('discount',TRUE);
+        $gst_tax  = $this->input->post('tax',TRUE);
         $invoice_description = $this->input->post('desc',TRUE);
         $this->db->where('invoice_id', $invoice_id);
         $this->db->delete('invoice_details');
@@ -1010,6 +1011,7 @@ if(!empty($this->input->post('paid_amount',TRUE))){
             $cartoon_quantity = $cartoon[$i];
             $product_quantity = $quantity[$i];
             $product_rate     = $rate[$i];
+            $g_tax     = $gst_tax[$i];
             $product_id       = $p_id[$i];
             $serial_no        = (!empty($serial_n[$i])?$serial_n[$i]:null);
             $total_price      = $total_amount[$i];
@@ -1034,7 +1036,7 @@ if(!empty($this->input->post('paid_amount',TRUE))){
                 'discount'           => $discount,
                 'total_price'        => $total_price,
                 'discount_per'       => $dis_per,
-                'tax'                => $this->input->post('total_tax',TRUE),
+                'tax'                => $g_tax,
                 'paid_amount'        => $paidamount,
                  'supplier_rate'     => $supplier_rate,
                 'due_amount'         => $this->input->post('due_amount',TRUE),

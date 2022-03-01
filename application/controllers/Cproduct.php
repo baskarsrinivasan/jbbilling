@@ -108,6 +108,7 @@ class Cproduct extends CI_Controller {
             $data['product_id']   = $product_id;
             $data['product_name'] = $this->input->post('product_name',TRUE);
             $data['category_id']  = $this->input->post('category_id',TRUE);
+            $data['product_type']  = $this->input->post('product_type',TRUE);
             $data['unit']         = $this->input->post('unit',TRUE);
             $data['tax']          = $tax_percentage;
             $data['sgst']          = $sgst;
@@ -218,6 +219,7 @@ class Cproduct extends CI_Controller {
     }
             $data['product_name']   = $this->input->post('product_name',TRUE);
             $data['category_id']    = $this->input->post('category_id',TRUE);
+            $data['product_type']    = $this->input->post('product_type',TRUE);
             $data['price']          = $price;
             $data['serial_no']      = $this->input->post('serial_no',TRUE);
             $data['product_model']  = $this->input->post('model',TRUE);
