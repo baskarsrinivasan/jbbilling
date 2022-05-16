@@ -1067,7 +1067,11 @@ if(!empty($this->input->post('paid_amount',TRUE))){
                         d.unit,
                         d.product_model,
                         a.paid_amount as paid_amount,
-                        a.due_amount as due_amount'
+                        a.due_amount as due_amount,
+                        d.sgst,
+                        d.cgst,
+                        d.price
+                        '
                     );
         $this->db->from('invoice a');
         $this->db->join('invoice_details c', 'c.invoice_id = a.invoice_id');

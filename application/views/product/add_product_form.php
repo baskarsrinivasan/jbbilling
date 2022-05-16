@@ -184,6 +184,7 @@
                             <div class="col-sm-7">
                                 <select class="form-control gst" name="tax">
                                     <option>Select</option>
+                                    <option value="0">0</option>
                                     <option value="5">5</option>
                                     <option value="12">12</option>
                                     <option value="18">18</option>

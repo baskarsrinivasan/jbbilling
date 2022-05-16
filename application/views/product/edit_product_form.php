@@ -167,6 +167,7 @@
                                 
                                 <select class="form-control gst" name="tax">
                                     <option>Select</option>
+                                    <option value="0" <?php if($tax=='0') { echo 'selected'; }?>>0</option>
                                     <option value="5" <?php if($tax=='5') { echo 'selected'; }?>>5</option>
                                     <option value="12" <?php if($tax=='12') { echo 'selected'; }?>>12</option>
                                     <option value="18" <?php if($tax=='18') { echo 'selected'; }?>>18</option>

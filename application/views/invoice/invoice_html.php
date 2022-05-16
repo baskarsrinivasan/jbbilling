@@ -60,20 +60,20 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                     }
                                     ?>" class="img-bottom-m" alt="" >
                                     <br>
-                                    <span class="label label-success-outline m-r-15 p-10" ><?php echo display('billing_from') ?></span>
-                                    <address class="margin-top10" style="font-size:15px">
-                                        <strong class="" style="font-size:13px;max-height:100px;" >{company_name}</strong><br>
-                                        <strong class="company_name_p" style="font-size:15px">{address}</strong><br>
-                                        <abbr><b><?php echo display('mobile') ?>:</b></abbr> {mobile}<br>
-                                        <abbr><b><?php echo display('email') ?>:</b></abbr> 
+                                    <span class="label label-success-outline m-r-15 p-10" ><?php echo display('billing_from') ?></span><br/>
+                                    
+                                        <abbr class="" style="font-size:13px;margin-top:10px" >{company_name}</abbr><br/>
+                                        <abbr class="" style="font-size:13px">{address}</abbr><br>
+                                        <abbr><?php echo display('mobile') ?>:</abbr> {mobile}<br>
+                                        <abbr><?php echo display('email') ?>:</abbr> 
                                         {email}<br>
-                                        <abbr><b><?php echo display('website') ?>:</b></abbr> 
+                                        <abbr><?php echo display('website') ?>:</abbr> 
                                         {website}<br>
-                                        <abbr><b>GSTIN NUMBER:</b></abbr> 
+                                        <abbr>GSTIN NUMBER:</abbr> 
                                         {gstin_number}<br>
                                          {/company_info}
                                          <abbr>{tax_regno}</abbr>
-                                    </address>
+                                    
                                    
                                   
 
@@ -87,24 +87,25 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 
                                     
                                     <address class="margin-top10" style="font-size:15px">  
-                                        <strong  class="company_name_p" style="font-size:15px">{customer_name} </strong><br/>
-                                        <strong  class="company_name_p" style="font-size:15px"> GST TIN NUMBER:</strong> {gst}
+                                        <abbr  class="company_name_p" style="font-size:13px">{customer_name} </abbr><br/>
+                                        <abbr  class="company_name_p" style="font-size:13px"> GSTIN NUMBER:</abbr> {gst} 
                                         <?php if ($customer_address) { ?>
+                                            <br/>
                                             {customer_address}
                                         <?php } ?>
                                         <br>
-                                        <abbr><b><?php echo display('mobile') ?>:</b></abbr>
+                                        <abbr><?php echo display('mobile') ?>:</abbr>
                                         <?php if ($customer_mobile) { ?>
                                             {customer_mobile}
                                         <?php }if ($customer_email) {
                                             ?>
                                             <br>
-                                            <abbr><b><?php echo display('email') ?>:</b></abbr> 
+                                            <abbr><?php echo display('email') ?>:</abbr> 
                                             {customer_email}
                                         <?php } ?>
-                                        <br/><abbr><b><?php echo display('invoice_no') ?>:</b></abbr> 
+                                        <br/><abbr><?php echo display('invoice_no') ?>:</abbr> 
                                         {invoice_no}
-                                        <br/><abbr><b><?php echo display('billing_date') ?>:</b></abbr> 
+                                        <br/><abbr><?php echo display('billing_date') ?>:</abbr> 
                                         {final_date}
                                     </address>
                                     
@@ -134,9 +135,13 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                         <?php }else{ ?>
 <th class="text-right"><?php echo ''; ?> </th>
 <?php }?>
-                                            <th class="text-right"><?php echo display('rate') ?></th>
-                                            <th class="text-right">GST%</th>
-                                            <th class="text-right"><?php echo display('ammount') ?></th>
+<th class="text-right">SGST%</th>
+                                            <th class="text-right">CGST%</th>
+                                            <th class="text-right">Product Rate</th>
+                                            
+                                            <th class="text-right">SGST Amount</th>
+                                            <th class="text-right">CGST Amount</th>
+                                            <th class="text-right">Total Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -155,9 +160,12 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                             <?php } else { ?>
                                                 <td align="right"><?php echo (($position == 0) ? "$currency {discount_per}" : "{discount_per} $currency") ?></td>
                                             <?php } ?>
-
+                                            <td align="right">{sgst}%</td>
+                                            <td align="right">{cgst}%</td>
                                             <td align="right"><?php echo (($position == 0) ? "$currency {rate}" : "{rate} $currency") ?></td>
-                                            <td align="right">{tax}</td>
+                                           
+                                            <td align="right"><?php echo $currency.$sgst_amount;?></td>
+                                            <td align="right"><?php echo $currency.$cgst_amount;?></td>
                                             <td align="right"><?php echo (($position == 0) ? "$currency {total_price}" : "{total_price} $currency") ?></td>
                                             
                                         </tr>
@@ -166,6 +174,9 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                             <td class="text-left" colspan="5"><b><?php echo display('grand_total') ?>:</b></td>
                                             <td align="right" ><b>{subTotal_quantity}</b></td>
                                             <td></td>
+                                            <td></td>
+                                            <td></td>
+                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td align="right" ><b><?php echo (($position == 0) ? "$currency {subTotal_ammount}" : "{subTotal_ammount} $currency") ?></b></td>

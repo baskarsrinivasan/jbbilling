@@ -787,7 +787,7 @@ class Cinvoice extends CI_Controller {
          $this->db->join('acc_coa b','a.customer_id = b.customer_id','left');
          $this->db->where('a.customer_id',$customer_id);
         $result = $this->db->get()->result_array();
-       $balance = $result[0]['balance'];   
+       $balance = 0;   
        $b = (!empty($balance)?$balance:0);                            
         if ($b){
            echo  $b;

@@ -351,6 +351,8 @@ class Linvoice {
    
             }
         }
+$sgst_amount=$invoice_detail[0]['price']*$invoice_detail[0]['sgst']/100;
+$cgst_amount=$invoice_detail[0]['price']*$invoice_detail[0]['cgst']/100;
 
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $company_info = $CI->Invoices->retrieve_company();
@@ -362,6 +364,114 @@ class Linvoice {
         'title'             => display('invoice_details'),
         'invoice_id'        => $invoice_detail[0]['invoice_id'],
         'tax'        => $invoice_detail[0]['tax'],
+        'sgst_amount'=>$sgst_amount,
+        'cgst_amount'=>$cgst_amount,
+        'invoice_no'        => $invoice_detail[0]['invoice'],
+        'customer_name'     => $invoice_detail[0]['customer_name'],
+        'customer_address'  => $invoice_detail[0]['customer_address'],
+        'gst'  => $invoice_detail[0]['gst'],
+        'customer_mobile'   => $invoice_detail[0]['customer_mobile'],
+        'customer_email'    => $invoice_detail[0]['customer_email'],
+        'final_date'        => $invoice_detail[0]['final_date'],
+        'invoice_details'   => $invoice_detail[0]['invoice_details'],
+        'total_amount'      => number_format($invoice_detail[0]['total_amount']+$invoice_detail[0]['prevous_due'], 2, '.', ','),
+        'subTotal_quantity' => $subTotal_quantity,
+        'total_discount'    => number_format($invoice_detail[0]['total_discount'], 2, '.', ','),
+        'total_tax'         => number_format($invoice_detail[0]['total_tax'], 2, '.', ','),
+        'subTotal_ammount'  => number_format($subTotal_ammount, 2, '.', ','),
+        'paid_amount'       => number_format($invoice_detail[0]['paid_amount'], 2, '.', ','),
+        'due_amount'        => number_format($invoice_detail[0]['due_amount'], 2, '.', ','),
+        'previous'          => number_format($invoice_detail[0]['prevous_due'], 2, '.', ','),
+        'shipping_cost'     => number_format($invoice_detail[0]['shipping_cost'], 2, '.', ','),
+        'invoice_all_data'  => $invoice_detail,
+        'company_info'      => $company_info,
+        'currency'          => $currency_details[0]['currency'],
+        'position'          => $currency_details[0]['currency_position'],
+        'discount_type'     => $currency_details[0]['discount_type'],
+        'am_inword'         => $amount_inword,
+        'is_discount'       => $is_discount,
+        'users_name'        => $users->first_name.' '.$users->last_name,
+        'tax_regno'         => $txregname,
+        'is_desc'           => $descript,
+        'is_serial'         => $isserial,
+        'is_unit'           => $isunit,
+        );
+
+        $chapterList = $CI->parser->parse('invoice/invoice_html', $data, true);
+        return $chapterList;
+    }
+    public function invoice_html_data_manual($invoice_id) {
+        $CI = & get_instance();
+        $CI->load->model('Invoices');
+        $CI->load->model('Web_settings');
+        $CI->load->library('occational');
+        $CI->load->library('numbertowords');
+        $invoice_detail = $CI->Invoices->retrieve_invoice_html_data($invoice_id);
+        $taxfield = $CI->db->select('*')
+                ->from('tax_settings')
+                ->where('is_show',1)
+                ->get()
+                ->result_array();
+        $txregname ='';
+        foreach($taxfield as $txrgname){
+        $regname = $txrgname['tax_name'].' Reg No  - '.$txrgname['reg_no'].', ';
+        $txregname .= $regname;
+        }       
+        $subTotal_quantity = 0;
+        $subTotal_cartoon = 0;
+        $subTotal_discount = 0;
+        $subTotal_ammount = 0;
+        $descript = 0;
+        $isserial = 0;
+        $isunit = 0;
+        $is_discount = 0;
+        if (!empty($invoice_detail)) {
+            foreach ($invoice_detail as $k => $v) {
+                $invoice_detail[$k]['final_date'] = $CI->occational->dateConvert($invoice_detail[$k]['date']);
+                $subTotal_quantity = $subTotal_quantity + $invoice_detail[$k]['quantity'];
+                $subTotal_ammount = $subTotal_ammount + $invoice_detail[$k]['total_price'];
+               
+            }
+
+            $i = 0;
+            foreach ($invoice_detail as $k => $v) {
+                $i++;
+                $invoice_detail[$k]['sl'] = $i;
+                if(!empty($invoice_detail[$k]['description'])){
+                    $descript = $descript+1;
+                    
+                }
+                 if(!empty($invoice_detail[$k]['serial_no'])){
+                    $isserial = $isserial+1;
+                    
+                }
+                 if(!empty($invoice_detail[$k]['discount_per'])){
+                    $is_discount = $is_discount+1;
+                    
+                }
+
+                if(!empty($invoice_detail[$k]['unit'])){
+                    $isunit = $isunit+1;
+                    
+                }
+   
+            }
+        }
+$sgst_amount=$invoice_detail[0]['price']*$invoice_detail[0]['sgst']/100;
+$cgst_amount=$invoice_detail[0]['price']*$invoice_detail[0]['cgst']/100;
+
+        $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+        $company_info = $CI->Invoices->retrieve_company();
+        $totalbal = $invoice_detail[0]['total_amount']+$invoice_detail[0]['prevous_due'];
+        $amount_inword = $CI->numbertowords->convert_number($totalbal);
+        $user_id = $invoice_detail[0]['sales_by'];
+        $users = $CI->Invoices->user_invoice_data($user_id);
+        $data = array(
+        'title'             => display('invoice_details'),
+        'invoice_id'        => $invoice_detail[0]['invoice_id'],
+        'tax'        => $invoice_detail[0]['tax'],
+        'sgst_amount'=>$sgst_amount,
+        'cgst_amount'=>$cgst_amount,
         'invoice_no'        => $invoice_detail[0]['invoice'],
         'customer_name'     => $invoice_detail[0]['customer_name'],
         'customer_address'  => $invoice_detail[0]['customer_address'],
@@ -399,99 +509,99 @@ class Linvoice {
 
 
         //Invoice html Data manual
-    public function invoice_html_data_manual($invoice_id) {
-        $CI = & get_instance();
-        $CI->load->model('Invoices');
-        $CI->load->model('Web_settings');
-        $CI->load->library('occational');
-        $CI->load->library('numbertowords');
-        $invoice_detail = $CI->Invoices->retrieve_invoice_html_data($invoice_id);
-        $taxfield = $CI->db->select('*')
-                ->from('tax_settings')
-                ->where('is_show',1)
-                ->get()
-                ->result_array();
-        $txregname ='';
-        foreach($taxfield as $txrgname){
-        $regname = $txrgname['tax_name'].' Reg No  - '.$txrgname['reg_no'].', ';
-        $txregname .= $regname;
-        }       
-        $subTotal_quantity = 0;
-        $subTotal_cartoon = 0;
-        $subTotal_discount = 0;
-        $subTotal_ammount = 0;
-        $descript = 0;
-        $isserial = 0;
-        $isunit = 0;
-        if (!empty($invoice_detail)) {
-            foreach ($invoice_detail as $k => $v) {
-                $invoice_detail[$k]['final_date'] = $CI->occational->dateConvert($invoice_detail[$k]['date']);
-                $subTotal_quantity = $subTotal_quantity + $invoice_detail[$k]['quantity'];
-                $subTotal_ammount = $subTotal_ammount + $invoice_detail[$k]['total_price'];
-            }
+    // public function invoice_html_data_manual($invoice_id) {
+    //     $CI = & get_instance();
+    //     $CI->load->model('Invoices');
+    //     $CI->load->model('Web_settings');
+    //     $CI->load->library('occational');
+    //     $CI->load->library('numbertowords');
+    //     $invoice_detail = $CI->Invoices->retrieve_invoice_html_data($invoice_id);
+    //     $taxfield = $CI->db->select('*')
+    //             ->from('tax_settings')
+    //             ->where('is_show',1)
+    //             ->get()
+    //             ->result_array();
+    //     $txregname ='';
+    //     foreach($taxfield as $txrgname){
+    //     $regname = $txrgname['tax_name'].' Reg No  - '.$txrgname['reg_no'].', ';
+    //     $txregname .= $regname;
+    //     }       
+    //     $subTotal_quantity = 0;
+    //     $subTotal_cartoon = 0;
+    //     $subTotal_discount = 0;
+    //     $subTotal_ammount = 0;
+    //     $descript = 0;
+    //     $isserial = 0;
+    //     $isunit = 0;
+    //     if (!empty($invoice_detail)) {
+    //         foreach ($invoice_detail as $k => $v) {
+    //             $invoice_detail[$k]['final_date'] = $CI->occational->dateConvert($invoice_detail[$k]['date']);
+    //             $subTotal_quantity = $subTotal_quantity + $invoice_detail[$k]['quantity'];
+    //             $subTotal_ammount = $subTotal_ammount + $invoice_detail[$k]['total_price'];
+    //         }
 
-            $i = 0;
-            foreach ($invoice_detail as $k => $v) {
-                $i++;
-                $invoice_detail[$k]['sl'] = $i;
-                  if(!empty($invoice_detail[$k]['description'])){
-                    $descript = $descript+1;
+    //         $i = 0;
+    //         foreach ($invoice_detail as $k => $v) {
+    //             $i++;
+    //             $invoice_detail[$k]['sl'] = $i;
+    //               if(!empty($invoice_detail[$k]['description'])){
+    //                 $descript = $descript+1;
                     
-                }
-                 if(!empty($invoice_detail[$k]['serial_no'])){
-                    $isserial = $isserial+1;
+    //             }
+    //              if(!empty($invoice_detail[$k]['serial_no'])){
+    //                 $isserial = $isserial+1;
                     
-                }
-                 if(!empty($invoice_detail[$k]['unit'])){
-                    $isunit = $isunit+1;
+    //             }
+    //              if(!empty($invoice_detail[$k]['unit'])){
+    //                 $isunit = $isunit+1;
                     
-                }
+    //             }
    
-            }
-        }
+    //         }
+    //     }
 
-        $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-        $company_info = $CI->Invoices->retrieve_company();
-        $totalbal = $invoice_detail[0]['total_amount']+$invoice_detail[0]['prevous_due'];
-        $amount_inword = $CI->numbertowords->convert_number($totalbal);
-        $user_id = $invoice_detail[0]['sales_by'];
-        $users = $CI->Invoices->user_invoice_data($user_id);
-        $data = array(
-        'title'             => display('invoice_details'),
-        'invoice_id'        => $invoice_detail[0]['invoice_id'],
-        'invoice_no'        => $invoice_detail[0]['invoice'],
-        'customer_name'     => $invoice_detail[0]['customer_name'],
-        'customer_address'  => $invoice_detail[0]['customer_address'],
-        'customer_mobile'   => $invoice_detail[0]['customer_mobile'],
-        'customer_email'    => $invoice_detail[0]['customer_email'],
-        'final_date'        => $invoice_detail[0]['final_date'],
-        'invoice_details'   => $invoice_detail[0]['invoice_details'],
-        'total_amount'      => number_format($invoice_detail[0]['total_amount']+$invoice_detail[0]['prevous_due'], 2, '.', ','),
-        'subTotal_quantity' => $subTotal_quantity,
-        'total_discount'    => number_format($invoice_detail[0]['total_discount'], 2, '.', ','),
-        'total_tax'         => number_format($invoice_detail[0]['total_tax'], 2, '.', ','),
-        'subTotal_ammount'  => number_format($subTotal_ammount, 2, '.', ','),
-        'paid_amount'       => number_format($invoice_detail[0]['paid_amount'], 2, '.', ','),
-        'due_amount'        => number_format($invoice_detail[0]['due_amount'], 2, '.', ','),
-        'previous'          => number_format($invoice_detail[0]['prevous_due'], 2, '.', ','),
-        'shipping_cost'     => number_format($invoice_detail[0]['shipping_cost'], 2, '.', ','),
-        'invoice_all_data'  => $invoice_detail,
-        'company_info'      => $company_info,
-        'currency'          => $currency_details[0]['currency'],
-        'position'          => $currency_details[0]['currency_position'],
-        'discount_type'     => $currency_details[0]['discount_type'],
-        'am_inword'         => $amount_inword,
-        'is_discount'       => $invoice_detail[0]['total_discount']-$invoice_detail[0]['invoice_discount'],
-        'users_name'        => $users->first_name.' '.$users->last_name,
-        'tax_regno'         => $txregname,
-        'is_desc'           => $descript,
-        'is_serial'         => $isserial,
-        'is_unit'           => $isunit,
-        );
+    //     $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+    //     $company_info = $CI->Invoices->retrieve_company();
+    //     $totalbal = $invoice_detail[0]['total_amount']+$invoice_detail[0]['prevous_due'];
+    //     $amount_inword = $CI->numbertowords->convert_number($totalbal);
+    //     $user_id = $invoice_detail[0]['sales_by'];
+    //     $users = $CI->Invoices->user_invoice_data($user_id);
+    //     $data = array(
+    //     'title'             => display('invoice_details'),
+    //     'invoice_id'        => $invoice_detail[0]['invoice_id'],
+    //     'invoice_no'        => $invoice_detail[0]['invoice'],
+    //     'customer_name'     => $invoice_detail[0]['customer_name'],
+    //     'customer_address'  => $invoice_detail[0]['customer_address'],
+    //     'customer_mobile'   => $invoice_detail[0]['customer_mobile'],
+    //     'customer_email'    => $invoice_detail[0]['customer_email'],
+    //     'final_date'        => $invoice_detail[0]['final_date'],
+    //     'invoice_details'   => $invoice_detail[0]['invoice_details'],
+    //     'total_amount'      => number_format($invoice_detail[0]['total_amount']+$invoice_detail[0]['prevous_due'], 2, '.', ','),
+    //     'subTotal_quantity' => $subTotal_quantity,
+    //     'total_discount'    => number_format($invoice_detail[0]['total_discount'], 2, '.', ','),
+    //     'total_tax'         => number_format($invoice_detail[0]['total_tax'], 2, '.', ','),
+    //     'subTotal_ammount'  => number_format($subTotal_ammount, 2, '.', ','),
+    //     'paid_amount'       => number_format($invoice_detail[0]['paid_amount'], 2, '.', ','),
+    //     'due_amount'        => number_format($invoice_detail[0]['due_amount'], 2, '.', ','),
+    //     'previous'          => number_format($invoice_detail[0]['prevous_due'], 2, '.', ','),
+    //     'shipping_cost'     => number_format($invoice_detail[0]['shipping_cost'], 2, '.', ','),
+    //     'invoice_all_data'  => $invoice_detail,
+    //     'company_info'      => $company_info,
+    //     'currency'          => $currency_details[0]['currency'],
+    //     'position'          => $currency_details[0]['currency_position'],
+    //     'discount_type'     => $currency_details[0]['discount_type'],
+    //     'am_inword'         => $amount_inword,
+    //     'is_discount'       => $invoice_detail[0]['total_discount']-$invoice_detail[0]['invoice_discount'],
+    //     'users_name'        => $users->first_name.' '.$users->last_name,
+    //     'tax_regno'         => $txregname,
+    //     'is_desc'           => $descript,
+    //     'is_serial'         => $isserial,
+    //     'is_unit'           => $isunit,
+    //     );
 
-        $chapterList = $CI->parser->parse('invoice/invoice_html_manual', $data, true);
-        return $chapterList;
-    }
+    //     $chapterList = $CI->parser->parse('invoice/invoice_html_manual', $data, true);
+    //     return $chapterList;
+    // }
 
     //POS invoice html Data
     public function pos_invoice_html_data($invoice_id) {
