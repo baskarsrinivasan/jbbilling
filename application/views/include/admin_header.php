@@ -467,6 +467,7 @@ $out_of_stock = $CI->Reports->out_of_stock_count();
                     } else {
                         echo " ";
                     }?>"><a href="<?php echo base_url('Creport') ?>"><?php echo display('stock_report') ?></a></li>
+                     <li class="treeview "><a href="<?php echo base_url('Admin_dashboard/retrieve_dateWise_supplier_SalesReports?from_date='.date('Y-m-d').'&to_date='.date('Y-m-d').'') ?>">Stock Supplier Report</a></li>
             <?php }?>
 
             </ul>

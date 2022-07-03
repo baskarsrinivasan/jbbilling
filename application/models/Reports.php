@@ -167,7 +167,17 @@ class reports extends CI_Model {
 
     }
 
-
+    public function getsupplierList(){
+        $this->db->select("*");
+        $this->db->from('supplier_information');
+       
+        $this->db->order_by('supplier_name', 'asc');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
 
     public function getCheckList($postData=null){
 
@@ -701,6 +711,32 @@ $this->db->select("sum(a.total_amount) as amount,count(a.invoice_id) as toal_inv
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->num_rows();
+        }
+        return false;
+    }
+    public function retrieve_dateWise_supplier_SalesReports($from_date,$to_date,$supplier_id) {
+        $this->db->select("*,(select sum(quantity) from invoice_details where product_id= `c`.`product_id`) as 'totalSalesQnty',(select sum(quantity) from product_purchase_details where product_id= `c`.`product_id`) as 'totalBuyQnty'");
+      
+        $this->db->from('supplier_information a');
+        $this->db->join('supplier_product b', 'b.supplier_id = a.supplier_id','inner');
+        $this->db->join('product_information c', 'c.product_id = b.product_id','inner');
+        $this->db->join('product_purchase d', 'd.supplier_id = b.supplier_id','inner'); 
+        $this->db->join('product_purchase_details e', 'e.purchase_id = d.purchase_id','inner');   
+        $this->db->join('invoice_details f', 'f.product_id = c.product_id');
+        $this->db->where(array('f.status' => 1, 'c.status' => 1));
+        $this->db->where('d.purchase_date >=', $from_date);
+        $this->db->where('d.purchase_date <=', $to_date);
+        $this->db->where('a.supplier_id',$supplier_id); 
+        $this->db->where('b.supplier_id',$supplier_id); 
+        $this->db->where('d.supplier_id',$supplier_id); 
+        $this->db->group_by('c.product_id');
+       
+        $query = $this->db->get();
+        
+        if ($query->num_rows() > 0) {
+            // print_r($this->db->last_query());exit();
+            return $query->result_array();
+           
         }
         return false;
     }

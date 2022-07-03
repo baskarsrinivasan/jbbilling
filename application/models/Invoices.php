@@ -1070,7 +1070,11 @@ if(!empty($this->input->post('paid_amount',TRUE))){
                         a.due_amount as due_amount,
                         d.sgst,
                         d.cgst,
-                        d.price
+                        d.price,
+                        ROUND(c.rate * c.quantity) as pro_total_amount,
+                        
+                        ROUND(c.rate * d.cgst * c.quantity / 100) as cgst_amount,
+                        ROUND(c.rate * d.sgst * c.quantity / 100) as sgst_amount
                         '
                     );
         $this->db->from('invoice a');

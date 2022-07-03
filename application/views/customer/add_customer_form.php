@@ -99,9 +99,9 @@
                        
 
                         <div class="form-group row">
-                            <label for="mobile" class="col-sm-4 col-form-label"><?php echo display('customer_mobile') ?> <i class="text-danger">*</i></label>
+                            <label for="mobile" class="col-sm-4 col-form-label"><?php echo display('customer_mobile') ?></label>
                             <div class="col-sm-8">
-                                <input class="form-control" name ="mobile" id="mobile" type="number" placeholder="<?php echo display('customer_mobile') ?>" min="0" tabindex="3" required>
+                                <input class="form-control" name ="mobile" id="mobile" type="number" placeholder="<?php echo display('customer_mobile') ?>" min="0" tabindex="3">
                             </div>
                         </div>
                          <div class="form-group row">

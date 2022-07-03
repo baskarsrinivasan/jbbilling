@@ -1,9 +1,100 @@
-<?php
+    <?php
 $CI = & get_instance();
 $CI->load->model('Web_settings');
 $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 ?>
 <!-- Content Wrapper. Contains page content -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<style>
+   @media print {
+        @page 
+    {
+        size: auto; 
+        margin: 0mm;
+    }
+    @page :footer {color: #fff } @page :header {color: #fff}
+    .content-header
+    {
+        display:none;
+    }
+    .panel-footer
+    {
+        display:none;
+    }
+    .main-footer
+    {
+        display:none;
+    }
+    .panel-bd
+    {
+        border:none;
+    }
+    
+  body:before{
+	content: 'SRI JB HEALTH CARE';
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 99 ;
+
+	color: #0d745e;
+	font-size: 20px;
+	font-weight: 500px;
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	opacity: 0.2;
+	transform: rotate(-45deg);
+    text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  }
+
+} 
+table {
+  
+  border-collapse: collapse;
+  width: 100%;
+  font-size:12px;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  
+}
+.basic_text
+{
+    font-size:12px;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+}
+
+td, th {
+  /* border: 1px solid #dddddd;  */
+ 
+  padding: 2px;
+  word-wrap: break-word;
+
+ 
+  
+  
+}
+
+.product_name
+{
+    max-width:150px;
+}
+
+.unit_details
+{
+    max-width:1px;
+}
+.quantity
+{
+    max-width:1px;   
+}
+
+
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -45,16 +136,71 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
             $this->session->unset_userdata('error_message');
         }
         ?>
+        
         <div class="row">
+            
             <div class="col-sm-12">
                 <div class="panel panel-bd">
                     <div id="printableArea">
                         <div class="panel-body">
                             <div class="row print_header">
-                                
-                                <div class="col-sm-8 company-content">
-                                    {company_info}
-                                    <img src="<?php
+                            
+                           
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                    
+                            <div class=""><p class="basic_text text-center"><b>sri jb healthcare Sales Invoice</b></p></div>
+
+                                    <table class="billing_address">
+  <tr>
+    <th>BILLING FROM</th>
+    <th>BILLING TO</th>
+    
+  </tr>
+  <tr>
+  {company_info}
+    <td>{company_name}</td>
+    {/company_info}
+    <td>{customer_name}</td>
+    
+  </tr>
+  <tr>
+  {company_info}
+    <td>{address}</td>
+    {/company_info}
+    <td>{customer_address}</td>
+    
+  </tr>
+  <tr>
+  {company_info}
+    <td>MOBILE: {mobile}</td>
+    {/company_info}
+    <td>MOBILE: {customer_mobile}</td>
+    
+  </tr>
+  <tr>
+  {company_info}
+    <td>EMAIL: {email}</td>
+    {/company_info}
+    <td>INVOICE NO: {invoice_no}</td>
+    
+  </tr>
+  <tr>
+  {company_info}
+    <td>WEBSITE: {website}</td>
+    {/company_info}
+    <td>BILLING DATE: {final_date}</td>
+    
+  </tr>
+  <tr>
+  {company_info}
+    <td>GSTIN NUMBER: {gstin_number}</td>
+    {/company_info}
+    <td>GSTIN NUMBER: {gst}</td>
+   
+  </tr>
+</table>
+
+                                    <!-- <img src="<?php
                                     if (isset($Web_settings[0]['invoice_logo'])) {
                                         echo html_escape($Web_settings[0]['invoice_logo']);
                                     }
@@ -72,7 +218,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                         <abbr>GSTIN NUMBER:</abbr> 
                                         {gstin_number}<br>
                                          {/company_info}
-                                         <abbr>{tax_regno}</abbr>
+                                         <abbr>{tax_regno}</abbr> -->
                                     
                                    
                                   
@@ -80,7 +226,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                 </div>
                                 
                                  
-                                <div class="col-sm-4 text-left invoice-address">
+                                <!-- <div class="col-sm-6 col-md-6 col-lg-6">
                                 <span class="label label-success-outline m-r-15"><?php echo display('billing_to') ?></span><br/>
 
                                     
@@ -109,84 +255,111 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                         {final_date}
                                     </address>
                                     
-                                    <!-- <strong class="">GSTIN NUMBER:</strong> {supplier_gst_number}</br/> -->
-                                </div>
+                                    <<strong class="">GSTIN NUMBER:</strong> {supplier_gst_number}</br/> 
+                                </div> -->
                             </div> 
 
                             <div class="table-responsive">
                                 <table class="table table-striped" id="invoice_details">
                                     <thead>
                                         <tr>
-                                            <th class="text-center"><?php echo display('sl') ?></th>
-                                            <th class="text-center"><?php echo display('product_name') ?></th>
-                                              <th class="text-center"><?php if($is_unit !=0){ echo display('unit');
+                                            <th class=""><?php echo display('sl') ?></th>
+                                            <th class=""><?php echo display('product_name') ?></th>
+                                              <th class=""><?php if($is_unit !=0){ echo display('unit');
                                               }?></th>
-                                            <th class="text-center"><?php if($is_desc !=0){ echo display('item_description');} ?></th>
-                                            <th class="text-center"><?php if($is_serial !=0){ echo display('serial_no');} ?></th>
-                                            <th class="text-right"><?php echo display('quantity') ?></th>
+                                            <th class=""><?php if($is_desc !=0){ echo display('item_description');} ?></th>
+                                            <th class=""><?php if($is_serial !=0){ echo display('serial_no');} ?></th>
+                                            <th class=""><?php echo display('quantity') ?></th>
                                             <?php if($is_discount > 0){ ?>
                                             <?php if ($discount_type == 1) { ?>
-                                                <th class="text-right"><?php echo display('discount_percentage') ?> %</th>
+                                                <th class=""><?php echo display('discount_percentage') ?> %</th>
                                             <?php } elseif ($discount_type == 2) { ?>
-                                                <th class="text-right"><?php echo display('discount') ?> </th>
+                                                <th class=""><?php echo display('discount') ?> </th>
                                             <?php } elseif ($discount_type == 3) { ?>
-                                                <th class="text-right"><?php echo display('fixed_dis') ?> </th>
+                                                <th class=""><?php echo display('fixed_dis') ?> </th>
                                             <?php } ?>
                                         <?php }else{ ?>
-<th class="text-right"><?php echo ''; ?> </th>
+<th class=""><?php echo ''; ?> </th>
 <?php }?>
-<th class="text-right">SGST%</th>
-                                            <th class="text-right">CGST%</th>
-                                            <th class="text-right">Product Rate</th>
+                                             <th class="">SGST%</th>
+                                            <th class="">CGST%</th>
+                                            <th class="">Rate</th>
                                             
-                                            <th class="text-right">SGST Amount</th>
-                                            <th class="text-right">CGST Amount</th>
-                                            <th class="text-right">Total Amount</th>
+                                            <!-- <th class="">SGST Amount</th>
+                                            <th class="">CGST Amount</th> -->
+                                            <th class="">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {invoice_all_data}
                                         <tr class="details productdatalineheight">
-                                            <td class="text-center">{sl}</td>
-                                            <td class="text-center"><div>{product_name} - ({product_model})</div></td>
-                                            <td class="text-center"><div>{unit}</div></td>
-                                            <td align="center">{description}</td>
-                                            <td align="center">{serial_no}</td>
-                                            <td align="right">{quantity}</td>
+                                            <td class="">{sl}</td>
+                                            <td class=" product_name"><div>{product_name} - ({product_model})</div></td>
+                                            <td class="unit_details"><div>{unit}</div></td>
+                                            <td class="description">{description}</td>
+                                            <td class="serial_no">{serial_no}</td>
+                                            <td class="quantity">{quantity}</td>
                                             
 
                                             <?php if ($discount_type == 1) { ?>
-                                                <td align="right">{discount_per}</td>
+                                                <td align="">{discount_per}</td>
                                             <?php } else { ?>
-                                                <td align="right"><?php echo (($position == 0) ? "$currency {discount_per}" : "{discount_per} $currency") ?></td>
+                                                <td align=""><?php echo (($position == 0) ? "$currency {discount_per}" : "{discount_per} $currency") ?></td>
                                             <?php } ?>
-                                            <td align="right">{sgst}%</td>
-                                            <td align="right">{cgst}%</td>
-                                            <td align="right"><?php echo (($position == 0) ? "$currency {rate}" : "{rate} $currency") ?></td>
+                                            <td align="">{sgst}%</td>
+                                            <td align="">{cgst}%</td>
+                                            <td align=""><?php echo (($position == 0) ? "$currency {rate}" : "{rate} $currency") ?></td>
                                            
-                                            <td align="right"><?php echo $currency.$sgst_amount;?></td>
-                                            <td align="right"><?php echo $currency.$cgst_amount;?></td>
-                                            <td align="right"><?php echo (($position == 0) ? "$currency {total_price}" : "{total_price} $currency") ?></td>
+                                            <!-- <td align="right"><?php echo $currency;?>{sgst_amount}</td>
+                                            <td align="right"><?php echo $currency;?>{cgst_amount}</td> -->
+                                            <td align=""><?php echo (($position == 0) ? "$currency {pro_total_amount}" : "{pro_total_amount} $currency") ?></td>
                                             
                                         </tr>
                                         {/invoice_all_data}
-                                        <tr>
-                                            <td class="text-left" colspan="5"><b><?php echo display('grand_total') ?>:</b></td>
-                                            <td align="right" ><b>{subTotal_quantity}</b></td>
+                                        <tr class="details productdatalineheight">
+                                            <td class="text-left" colspan="5"></td>
+                                            <td align="" ><b>{subTotal_quantity}</b></td>
+                                            
                                             <td></td>
+                                            <td align=""><b>Sub Total:</b></td>
                                             <td></td>
+                                            
                                             <td></td>
-                                             <td></td>
+                                            
+                                            <td align="" ><b><?php echo (($position == 0) ? "$currency {subTotal_ammount}" : "{subTotal_ammount} $currency") ?></b></td>
+                                        </tr>
+                                        <tr class="details productdatalineheight">
+                                            <td class="text-left" colspan="5"></td>
+                                            
                                             <td></td>
+                                            
                                             <td></td>
-                                            <td align="right" ><b><?php echo (($position == 0) ? "$currency {subTotal_ammount}" : "{subTotal_ammount} $currency") ?></b></td>
+                                            <td align="" ><b>Sgst:</b></td>
+                                            
+                                            <td align="" ><b></b></td>
+                                            <td></td>
+                                            <td align="" ><b><?php echo (($position == 0) ? "$currency {sgst_amount}" : "{sgst_amount} $currency") ?></b></td>
+                                        </tr>
+                                        <tr class="details productdatalineheight">
+                                            <td class="text-left" colspan="5"></td>
+                                            
+                                            <td></td>
+                                           
+                                            
+                                            
+                                            <td></td>
+                                            <td align="" ><b>Cgst:</b></td>
+                                            <td align="" ></td>
+                                            <td></td>
+                                            
+                                            <td align="" ><b><?php echo (($position == 0) ? "$currency {cgst_amount}" : "{cgst_amount} $currency") ?></b></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="row">
 
-                                <div class="col-xs-8 invoicefooter-content">
+                                <div class="col-xs-8 invoicefooter-content basic_text">
 
                                     <p></p>
                                     <p><strong>{invoice_details}</strong></p> 
@@ -218,19 +391,19 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                                 <td class="text-right border-bottom-top" ><?php echo html_escape((($position == 0) ? "$currency {shipping_cost}" : "{shipping_cost} $currency")) ?> </td>
                                             </tr>
                                         <?php } ?>
-                                        <tr>
+                                        <!-- <tr>
                                             <th class="text-left grand_total"><?php echo display('previous'); ?> :</th>
                                             <td class="text-right grand_total"><?php echo html_escape((($position == 0) ? "$currency {previous}" : "{previous} $currency")) ?></td>
-                                        </tr>
+                                        </tr> -->
                                         <tr>
                                             <th class="text-left grand_total"><?php echo display('grand_total') ?> :</th>
                                             <td class="text-right grand_total"><?php echo html_escape((($position == 0) ? "$currency {total_amount}" : "{total_amount} $currency")) ?></td>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <th class="text-left grand_total border-bottom-top"><?php echo display('paid_ammount') ?> : </th>
                                             <td class="text-right grand_total border-bottom-top"><?php echo html_escape((($position == 0) ? "$currency {paid_amount}" : "{paid_amount} $currency")) ?></td>
-                                        </tr>				 
-                                        <?php
+                                        </tr>				  -->
+                                        <!-- <?php
                                         if ($invoice_all_data[0]['due_amount'] != 0) {
                                             ?>
                                             <tr>
@@ -239,7 +412,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                                             </tr>
                                             <?php
                                         }
-                                        ?>
+                                        ?> -->
                                     </table>
 
                                    
@@ -248,12 +421,12 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                 <div class="inv-footer-left">
+                                 <div class="basic_text">
                                         <?php echo display('received_by') ?>
                                     </div>
                                 </div>
                                <div class="col-sm-4"></div>
-                                     <div class="col-sm-4"> <div class="inv-footer-right">
+                                     <div class="col-sm-4 basic_text text-right"> <div class="">
                                         <?php echo display('authorised_by') ?>
                                     </div></div>
                             </div>
@@ -261,9 +434,10 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                         </div>
                     </div>
 
-                    <div class="panel-footer text-left">
+                    <div class="panel-footer text-left basic_text">
                         <a  class="btn btn-danger" href="<?php echo base_url('Cinvoice'); ?>"><?php echo display('cancel') ?></a>
-                        <button  class="btn btn-info" onclick="printDiv('printableArea')"><span class="fa fa-print"></span></button>
+                           <button  class="btn btn-info" onclick="window.print();"><span class="fa fa-print"></span></button>
+                        <!-- <button  class="btn btn-info" onclick="printDiv('printableArea')"><span class="fa fa-print"></span></button> -->
 
                     </div>
                 </div>

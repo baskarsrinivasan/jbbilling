@@ -79,6 +79,7 @@ public function stock_report_single_item()
         $data['currency']     = $currency_details[0]['currency'];
         $data['totalnumber']  = $CI->Reports->totalnumberof_product();
         $data['company_info'] = $company_info; 
+        $data['supplier_info'] = $CI->Reports->getsupplierList(); 
         $reportList = $CI->parser->parse('report/stock_report',$data,true);
         return $reportList;
     }
@@ -87,6 +88,7 @@ public function stock_report_single_item()
     /// supplier wise stock report
     public function stock_supplierwise()
     {  
+      
         $CI =& get_instance();
         $CI->load->model('Reports');
         $data['title']        = 'stock';
@@ -94,6 +96,8 @@ public function stock_report_single_item()
         $currency_details     = $CI->Web_settings->retrieve_setting_editdata();
         $data['currency']     = $currency_details[0]['currency'];
         $data['totalnumber']  = $CI->Reports->totalnumberof_product();
+        $data['supplier_info'] = $CI->Reports->getsupplierList();
+
         $data['company_info'] = $company_info; 
         $reportList = $CI->parser->parse('report/supplierwise_stock',$data,true);
         return $reportList;
@@ -449,6 +453,50 @@ public function stock_report_single_item()
             'company'      => $company_info,
         );
         $reportList = $CI->parser->parse('report/sales_report', $data, true);
+        return $reportList;
+    }
+    
+    public function retrieve_dateWise_supplier_SalesReports($from_date,$to_date,$supplier_id) 
+    {
+        //print_r($content); exit();
+
+        $CI = & get_instance();
+        $CI->load->model('Reports');
+        $CI->load->model('Web_settings');
+        $CI->load->library('occational');
+        $sales_report = $CI->Reports->retrieve_dateWise_supplier_SalesReports($from_date,$to_date,$supplier_id);
+        //print_r($sales_report);
+       
+        $sales_amount = 0;
+        if (!empty($sales_report)) {
+            $i = 0;
+            foreach ($sales_report as $k => $v) {
+                $i++;
+                $sales_report[$k]['sl'] = $i;
+                $sales_report[$k]['sales_date'] = $CI->occational->dateConvert($sales_report[$k]['date']);
+                $sales_amount = $sales_amount + $sales_report[$k]['total_amount'];
+            }
+        }
+        $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+        $company_info = $CI->Reports->retrieve_company();
+        $supplier_info = $CI->Reports->getsupplierList(); 
+        
+         
+        $data = array(
+            'title'        => display('sales_report'),
+            'sales_amount' => $sales_amount,
+            'sales_report' => $sales_report,
+            'company_info' => $company_info,
+            'from_date'    => $from_date,
+            'to_date'      => $to_date,
+            'currency'     => $currency_details[0]['currency'],
+            'position'     => $currency_details[0]['currency_position'],
+            
+             'software_info' => $currency_details,
+            'company'      => $company_info,
+            'supplier_info'=>$supplier_info
+        );
+        $reportList = $CI->parser->parse('report/stock_report_supplier_wise', $data, true);
         return $reportList;
     }
  // ======================= Due Report start ===============================

@@ -22,6 +22,7 @@ class Creport extends CI_Controller {
         
         $this->template->full_admin_html_view($content); 
     }
+    
 
       public function supplier_wise_stock()
     {
@@ -31,11 +32,13 @@ class Creport extends CI_Controller {
        
         $content = $CI->lreport->stock_supplierwise();
         
+        
         $this->template->full_admin_html_view($content); 
     }
 
 
-    public function CheckList(){
+    public function CheckList()
+    {
         // GET data
         $this->load->model('Reports');
         $postData = $this->input->post();
@@ -167,6 +170,7 @@ class Creport extends CI_Controller {
 
         $this->template->full_admin_html_view($content);
     }
+    
 
     //Stock report supplir report
     public function stock_report_supplier_wise() {

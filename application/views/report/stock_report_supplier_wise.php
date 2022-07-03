@@ -6,12 +6,12 @@
             <i class="pe-7s-note2"></i>
         </div>
         <div class="header-title">
-            <h1><?php echo display('stock_report_product_wise') ?></h1>
-            <small><?php echo display('stock_report_product_wise') ?></small>
+            <h1>Supplier Based Stock Report</h1>
+            <small>Stock Report (Supplier Wise)</small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#"><?php echo display('stock') ?></a></li>
-                <li class="active"><?php echo display('stock_report_product_wise') ?></li>
+                <li class="active">Supplier Based Stock Report</li>
             </ol>
         </div>
     </section>
@@ -36,14 +36,24 @@
                 <div class="panel panel-default">
                     <div class="panel-body"> 
 
-                        <?php echo form_open('Creport/stock_date_to_date_product_wise', array('method' => 'get')); ?>
+                        <?php echo form_open('Admin_dashboard/retrieve_dateWise_supplier_SalesReports', array('method' => 'get')); ?>
 
                         <?php
                  
                         $today = date('Y-m-d');
                         ?>
-
+                 <div class="form-group">
+                            <label class="" for="from_date">Select Supplier</label>
+                            <select class="form-control" name="supplier_id" required>
+                                <option value=''>Select</option>
+                                <?php foreach($supplier_info as $row_supplier){?>
+                                <option value='<?php echo $row_supplier['supplier_id']?>'><?php echo $row_supplier['supplier_name']?></option>
+                                <?php } ?>
+                            </select>
+                            
+                        </div> 
                         <div class="form-group row">
+                            
                             <label for="from_date" class="col-sm-1 col-form-label"><?php echo display('from') ?>: <i class="text-danger">*</i></label>
                             <div class="col-sm-3">
                                 <input type="text" id="from_date" name="from_date" value="<?php echo $today; ?>" class="form-control datepicker" required/>
@@ -71,7 +81,7 @@
                 <div class="panel panel-bd lobidrag">
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <h4 class="text-left"><?php echo display('stock_report_product_wise') ?></h4>
+                            <h4 class="text-left">Stock Report (Supplier Wise)</h4>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -134,7 +144,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        if ($stok_report) {
+                                        if ($sales_report) {
                                             ?>
                                             <?php $sl = 1; ?>
                                             <?php
@@ -142,7 +152,7 @@
                                              $totalout = 0;
                                              $totalstock=0;
                                              $total_stocksaleprice=0;
-                                            foreach ($stok_report as $stok_report) {
+                                            foreach ($sales_report as $stok_report) {
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $sl; ?></td>
