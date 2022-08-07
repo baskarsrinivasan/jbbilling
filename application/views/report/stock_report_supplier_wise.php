@@ -1,4 +1,9 @@
-
+<?php
+$supplier_id=$this->input->get('supplier_id');
+$from_date=$this->input->get('from_date');
+$to_date=$this->input->get('to_date');
+//print_r($supplier_id);exit();
+?>
 <!-- Stock List Supplier Wise Start -->
 <div class="content-wrapper">
     <section class="content-header">

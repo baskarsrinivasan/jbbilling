@@ -1071,6 +1071,7 @@ if(!empty($this->input->post('paid_amount',TRUE))){
                         d.sgst,
                         d.cgst,
                         d.price,
+                        d.mrp_price,
                         ROUND(c.rate * c.quantity) as pro_total_amount,
                         
                         ROUND(c.rate * d.cgst * c.quantity / 100) as cgst_amount,

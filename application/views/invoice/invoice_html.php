@@ -283,6 +283,8 @@ td, th {
 <?php }?>
                                              <th class="">SGST%</th>
                                             <th class="">CGST%</th>
+                                            
+                                            <th class="">Mrp Rate</th>
                                             <th class="">Rate</th>
                                             
                                             <!-- <th class="">SGST Amount</th>
@@ -308,7 +310,9 @@ td, th {
                                             <?php } ?>
                                             <td align="">{sgst}%</td>
                                             <td align="">{cgst}%</td>
+                                            <td align=""><?php echo (($position == 0) ? "$currency {mrp_price}" : "{mrp_price} $currency") ?></td>
                                             <td align=""><?php echo (($position == 0) ? "$currency {rate}" : "{rate} $currency") ?></td>
+                                            
                                            
                                             <!-- <td align="right"><?php echo $currency;?>{sgst_amount}</td>
                                             <td align="right"><?php echo $currency;?>{cgst_amount}</td> -->
@@ -321,6 +325,7 @@ td, th {
                                             <td align="" ><b>{subTotal_quantity}</b></td>
                                             
                                             <td></td>
+                                            <td></td>
                                             <td align=""><b>Sub Total:</b></td>
                                             <td></td>
                                             
@@ -332,7 +337,7 @@ td, th {
                                             <td class="text-left" colspan="5"></td>
                                             
                                             <td></td>
-                                            
+                                            <td></td>
                                             <td></td>
                                             <td align="" ><b>Sgst:</b></td>
                                             
@@ -346,7 +351,7 @@ td, th {
                                             <td></td>
                                            
                                             
-                                            
+                                            <td></td>
                                             <td></td>
                                             <td align="" ><b>Cgst:</b></td>
                                             <td align="" ></td>

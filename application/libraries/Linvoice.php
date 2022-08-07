@@ -332,6 +332,7 @@ class Linvoice {
                 $subTotal_ammount = $subTotal_ammount + $invoice_detail[$k]['pro_total_amount'];
                 $sgst = $invoice_detail[$k]['sgst'];
                 $cgst = $invoice_detail[$k]['cgst'];
+                //$mrp_price = $invoice_detail[$k]['mrp_price'];
                 $sgst_amount = $sgst_amount+$invoice_detail[$k]['sgst_amount'];
                 $cgst_amount = $cgst_amount+$invoice_detail[$k]['cgst_amount'];
                 //$pro_total_amount=$invoice_detail[$k]['pro_total_amount'];

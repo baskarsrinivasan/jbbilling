@@ -140,6 +140,15 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group row">
+                                    <label for="sell_price" class="col-sm-4 col-form-label">Mrp Price<i class="text-danger">*</i> </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control text-right" id="mrp_price" name="mrp_price" type="text" required="" placeholder="0.00" tabindex="5" min="0">
+                                    </div>
+                                </div> 
+                            </div>
+                            
+                            <div class="col-sm-6">
+                                <div class="form-group row">
                                     <label for="unit" class="col-sm-4 col-form-label"><?php echo display('unit') ?></label>
                                     <div class="col-sm-8">
                                         <select class="form-control" id="unit" name="unit" tabindex="-1" aria-hidden="true">

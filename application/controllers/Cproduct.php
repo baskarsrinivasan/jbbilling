@@ -87,7 +87,7 @@ class Cproduct extends CI_Controller {
         }
 
         $price = $this->input->post('price',TRUE);
-      
+        $mrp_price = $this->input->post('mrp_price',TRUE);
         $tax_percentage = $this->input->post('tax',TRUE);
         $sgst=$tax_percentage/2;
       
@@ -115,6 +115,7 @@ class Cproduct extends CI_Controller {
             $data['cgst']          = $sgst;
             $data['serial_no']    = $this->input->post('serial_no',TRUE);
             $data['price']        = $price;
+            $data['mrp_price']        = $mrp_price;
             $data['product_model']= $this->input->post('model',TRUE);
             $data['product_details'] = $this->input->post('description',TRUE);
             $data['image']        = (!empty($image_url) ? $image_url : base_url('my-assets/image/product.png'));
@@ -202,6 +203,7 @@ class Cproduct extends CI_Controller {
 
 
         $price = $this->input->post('price',TRUE);
+        $mrp_price = $this->input->post('mrp_price',TRUE);
         $tax = $this->input->post('tax',TRUE);
         $sgst = $this->input->post('sgst',TRUE);
         $cgst = $this->input->post('cgst',TRUE);
@@ -221,6 +223,7 @@ class Cproduct extends CI_Controller {
             $data['category_id']    = $this->input->post('category_id',TRUE);
             $data['product_type']    = $this->input->post('product_type',TRUE);
             $data['price']          = $price;
+            $data['mrp_price']          = $mrp_price;
             $data['serial_no']      = $this->input->post('serial_no',TRUE);
             $data['product_model']  = $this->input->post('model',TRUE);
             $data['product_details']= $this->input->post('description',TRUE);
