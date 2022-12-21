@@ -195,6 +195,10 @@ td, th {
   {company_info}
     <td>GSTIN NUMBER: {gstin_number}</td>
     {/company_info}
+    <tr>
+  {company_info}
+    <td>D.L.NO: TN/TRE/20B/00003,TN/TRE/21B/00003</td>
+    {/company_info}
     <td>GSTIN NUMBER: {gst}</td>
    
   </tr>
@@ -424,6 +428,24 @@ td, th {
 
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                 <div class="basic_text">
+                                       <h5>Bank Details:</h5>
+                                       <h6 class="">Bank Name: State Bank Of India</h6>
+                                       <h6 class="">A/C NAME:SRIJBHEALTHCARE.</h6>
+                                       <h6 class="">A/C NO:40553630615</h6>
+                                       <h6 class="">IFSC CODE:SBIN0012800.</h6>
+                                       <h6 class="">BRANCH NAME:KKNAGAR BRANCH, TRICHY.</h6>
+                                       
+                                    </div>
+                                </div>
+                               <div class="col-sm-4"></div>
+                                     <div class="col-sm-4 basic_text text-right"> <div class="">
+                                        
+                                    </div></div>
+                            </div>
+                           
                             <div class="row">
                                 <div class="col-sm-4">
                                  <div class="basic_text">

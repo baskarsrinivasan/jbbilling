@@ -97,6 +97,7 @@ class Lproduct {
             $data['product_name']     = $product_detail[0]['product_name'];
             $data['product_type']     = $product_detail[0]['product_type'];
             $data['price']            = $product_detail[0]['price'];
+            $data['mrp_price']            = $product_detail[0]['mrp_price'];
             $data['serial_no']        = $product_detail[0]['serial_no'];
             $data['product_model']    = $product_detail[0]['product_model'];
             $data['product_details']  = $product_detail[0]['product_details'];
